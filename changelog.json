@@ -1,0 +1,65 @@
+{
+    "current-version": "v0.7.0B",
+    "changes": [
+        {
+            "header": "Sistema de notificaciones",
+            "description": "El sistema ha sido equipado con un subsistema de notificaciones para el módulo de tareas,
+                al crear una tarea, se enviará de inmediato una notificacion al usuario tanto por email como dentro del sistema.",
+            "version": "v0.7.0B"
+        },
+        {
+            "header": "Actividades recurrentes",
+            "description": "Se ha incorporado un módulo para actividades recurrentes, este se encargará de, automáticamente, crear
+                aquellas tareas que deben asignarse fijamente con cierta recurrencia.",
+            "version": "v0.6.0A",
+            "seeder-changes": [
+                {
+                    "change:": "TAccionesSeeder::'nombre' => 'actividades_recurrentes.registrar', 'navegacion' => true",
+                    "change:": "TAccionesSeeder::'nombre' => 'actividades_recurrentes.modificar', 'navegacion' => false",
+                    "change:": "TAccionesSeeder::'nombre' => 'actividades_recurrentes.listar', 'navegacion' => true",
+                    "change:": "TAccionesSeeder::'nombre' => 'actividades_recurrentes.eliminar', 'navegacion' => false"
+
+                }
+            ]
+        },
+        {
+            "header": "Calendario Academico",
+            "description": "Mediante la implementacion de el nuevo modulo de Calendario el sistema contara
+                            con la capacidad de llevar un registro de los dias laborables. Haciendo asi
+                            un seguimiento mas claro para la asignacion de tareas y los permisos y reposos.",
+            "version": "v0.5.0A",
+            "seeder-changes": [
+                {
+                    "change:": "TAccionesSeeder::'nombre' => 'calendario.actualizar', 'navegacion' => true"
+                }
+            ]
+        },
+        {
+            "header": "Agenda de Tareas",
+            "description": "El sistema ahora cuenta con una Agenda de Tareas. Puedes acceder
+                ingresando a la cartelera, allí, dependiendo de los roles que tenga asignados,
+                se mostrará información referente a las tareas, cumpleaños del mes, personal,
+                personal de reposo, entre otros.",
+            "version": "v0.4.1A"
+        },
+        {
+            "header": "Sistema de Acceso",
+            "description": "Es implementado el sistema de control de acceso por usuario para
+			    delimitar el uso del sistema segun el rol que posea cada usuario",
+            "version": "v0.4.1A"
+        },
+        {
+            "header": "Creación de Módulos Básicos en el Sistema",
+            "description": "El sistema cuenta con los modulos de funcionamiento mas basico
+			    como lo son -Usuarios -Roles -Tareas -Permisos y Reposos. brindandole
+			    una usabilidad basica, suficiente para una version alfa del mismo.",
+            "version": "v0.4.1A"
+        },
+        {
+            "header": "Creación de Colmena -SGTH",
+            "description": "Es creado el sistema Colmena, con una funcionalidad parcial.
+			    Faltando dos modulos de sistema para estar completo",
+            "version": "v0.4.1A"
+        }
+    ]
+}

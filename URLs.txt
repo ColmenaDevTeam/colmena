@@ -1,0 +1,32 @@
+DevTeam:            https://github.com/ColmenaDevTeam
+Repo:               https://github.com/ColmenaDevTeam/colmena-sgth
+Repo (git https):   https://github.com/ColmenaDevTeam/colmena-sgth.git
+Repo (git ssh):     git@github.com:ColmenaDevTeam/colmena-sgth.git
+Wiki:               https://github.com/ColmenaDevTeam/colmena-sgth/wiki
+Issues:             https://github.com/ColmenaDevTeam/colmena-sgth/issues
+License:            http://creativecommons.org/licenses/by-nc/4.0/
+
+function validarFormulario(idForm){
+    if(idForm == 'formActiRecu' || idForm == 'tareas?'){
+        //Validar el nombre
+		var campoTitulo= document.getElementById("title");
+		var campoDetalles=document.getElementById('details');
+		if(campoTitulo.value.length < 10){
+			alert("El título debe contener al menos 10 caracteres");
+			campoTitulo.focus();
+			return false;
+		}
+		else if(campoTitulo.value.length >= 45){
+			alert("El título debe contener menos de 45 caracteres");
+			campoTitulo.focus();
+			return false;
+		}
+		if(campoDetalles.value.length < 50){
+			alert("El detalle debe contener al menos 50 caracteres");
+			campoNombre.focus();
+			return false;
+		}
+		document.formTareas.submit();
+		return true;
+    }
+}

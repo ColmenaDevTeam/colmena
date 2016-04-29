@@ -1,0 +1,15 @@
+Tareas:
+    dice: EL LA TAREA HA SIDO MODIFICADA en los avisos
+    En el metodo ver, comprobar si es suya, si no, comprobar si se tiene permisos
+Actividades recurrentes:
+    En vez de tomarse la fecha de hoy cuando se deja vacía, se debe tomar la de mañana en el registro
+    Si ya fue lanzada, no se debe permitir que modifique la fecha
+    En el metodo ver, comprobar si es suya, si no, comprobar si se tiene permisos
+Footer:
+    Organizar los imports de JS
+About:
+    Actualizar referencias
+
+Mailer:
+    Reabilitarlo
+    Mejorar el manejo de errores
