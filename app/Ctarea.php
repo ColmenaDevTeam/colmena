@@ -21,6 +21,11 @@ class Ctarea extends Model
     public function getURL(){
         return "/tareas/ver/".$this->idTar;
     }
+    /*public function buscadorFechaEst(fechadada){
+        dd $tareas = DB::table('t_tareas')->where('fecEst', '=', fechadada )->get();
+        return $tareas;
+    }
+    */
     public static function enviarEmailTareaAsignada($Otarea){
         $asunto = "Tienes una nueva tarea asignada | Colmena -SGTH";
         $mensaje = <<<EOD

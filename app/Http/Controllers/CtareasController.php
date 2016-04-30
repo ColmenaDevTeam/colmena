@@ -106,15 +106,35 @@ cia al metodo getListar del controlador de ese modulo.
     public function getRegistrar(){
         if(!(\Auth::user()->tieneAccion('tareas.registrar')))
             return redirect('errores/acceso-negado');
-    	$Ousuarios = Cusuario::all();
-        return view("tareas.registrar")->with('Ousuarios',$Ousuarios);
+    	$usuarios = Cusuario::where('username', '!=', env('APP_DEV_USERNAME'))->get();
+        return view("tareas.registrar")->with('usuarios',$usuarios);
     }
 
     public function postRegistrar(Request $request){
         if(!(\Auth::user()->tieneAccion('tareas.registrar')))
             return redirect('errores/acceso-negado');
-    	$Ousuarios=Cusuario::all();
-    	//$oTarea=Ctarea::find($request->input("title"));
+    	$idsUsuarios = input('usuarios');
+
+        foreach ($idsUsuarios as $idUsuario) {
+            $Otarea = New Ctarea;
+            $Otarea->titulo = $request->input("title");
+            $Otarea->fecEst = $request->input("deliverdate");
+            $Otarea->detalle = $request->input("details");
+            $Otarea->prioridad = $request->input("priority");
+            $Otarea->complejidad = $request->input("complexity");
+            $Otarea->estTar = 'Asignada';
+            $Otarea->tipTar = $request->input("tipoTarea");
+            $Otarea->idUsu = $idUsuario;
+            $Otarea->save();
+        }
+        CTarea::enviarEmailTareaAsignada($Otarea);
+        return redirect("tareas/registrar")->with(['usuarios'=>$usuarios, 'estado' => 'realizado']);
+    }
+    /*public function postRegistrarNew(Request $request){
+        if(!(\Auth::user()->tieneAccion('tareas.registrar')))
+            return redirect('errores/acceso-negado');
+        $Ousuarios=Cusuario::all();
+        //$oTarea=Ctarea::find($request->input("title"));
         $Ousuario=Cusuario::findOrFail($request->input("responsable"));
 
         $Otarea = New Ctarea;
@@ -131,6 +151,7 @@ cia al metodo getListar del controlador de ese modulo.
         CTarea::enviarEmailTareaAsignada($Otarea);
         return redirect("tareas/registrar")->with(['Ousuarios'=>$Ousuarios, 'estado' => 'realizado']);
     }
+    */
     public function getModificar(Request $request, $idTarea = -1){
         if(!(\Auth::user()->tieneAccion('tareas.modificar')))
             return redirect('errores/acceso-negado');

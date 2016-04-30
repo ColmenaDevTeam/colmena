@@ -34,7 +34,7 @@
 			@endif
 			<div class="row">
 				<div class="contact-form">
-					<form id="formTareas" role="form" method="post" action="" name="formTareas">
+					<form id="formTareas" role="form" method="post" action="/tareas/registrar" name="formTareas">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="row">
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -64,17 +64,6 @@
 									</select> 
 								</div>
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
-							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-								<div class="form-group has-feedback">
-									<label for="name">Responsable</label>
-									<select name="responsable" id="responsable" class="form-control">
-										@foreach($Ousuarios as $Ousuario)
-										<option value={{$Ousuario->idUsu}}>{{$Ousuario->nombres}} {{$Ousuario->apellidos}}</option>
-										@endforeach
-									</select> 
-									<i class="fa fa-user form-control-feedback"></i>
-								</div>
-							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">													
 								<div class="form-group has-feedback">
 									<label for="birthdate">Fecha de Entrega</label>
@@ -100,36 +89,112 @@
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 								<div class="form-group has-feedback">
 									<label for="firstname">Detalles</label>
-									<textarea class="form-control" rows="4" id="details" name="details" placeholder="" required minlength="50" id="details"></textarea>
+									<textarea class="form-control" rows="4" id="details" name="details" placeholder="" required minlength="10" id="details"></textarea>
 									<i class="fa fa-pencil-square-o form-control-feedback"></i>
 								</div>
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<input type="button" value="Registrar Tarea" onClick="validar()"class="btn btn-default">
-							</div><!-- /.col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
 						</div><!-- -/.row-->
+							<div class="list-group">
+								<a class="list-group-item active">* Listado de usuarios</a>
+								<div class="row">
+									@foreach ($usuarios as $Ousuario)
+									<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+										<a href="#{{$Ousuario->idUsu}}" class="list-group-item" onClick="setCheck('{{$Ousuario->idUsu}}')">
+											<input type="checkbox" style=""id="{{$Ousuario->idUsu}}" onClick="setCheck('{{$Ousuario->idUsu}}')" name="usuarios[]" value="{{$Ousuario->idUsu}}">
+												{{$Ousuario->getNombreCompleto()}}
+												<span class="label label-info pull-right" title="Grádo de ocupación de {{$Ousuario->getNombreCompleto()}}">
+													{{$Ousuario->getGradoOcupacion()}}
+												</span>
+											</input>
+										</a>
+									</div><!-- /.col-xs-12 col-sm-6 col-md-4 col-lg-4-->
+									@endforeach
+								</div><!-- /.row-->
+								<div class="row">
+									<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+										<input type="button" value="Seleccionar todos" class="btn btn-default" onClick="setCheck('*')"/>
+										<input type="button" value="Limpiar" class="btn btn-warning" onClick="setCheck('!')"/>
+									</div><!-- /.col-xs-12 col-sm-6 col-md-4 col-lg-4-->
+								</div><!-- /.row-->
+							</div><!-- /.list-group-->
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								<input type="button" value="Registrar Tarea" onClick="validar()" class="btn btn-default">
+							</div><!-- /.col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
+						</div><!-- /.row-->
 					</form>
 				</div><!-- /.contact-form -->
 			</div><!-- /.row -->
 		</div><!-- /.container-->
 	</section>
-<script language="JavaScript">
+<script language="JavaScript" type="text/javascript">
 	function validar(){
 		//Validar el nombre
-		var campoTitulo= document.getElementById("title");
-		var campoDetalles=document.getElementById('details');
+		var campoTitulo = document.getElementById("titulo");
+		var campoDetalles = document.getElementById('detalle');
 		if(campoTitulo.value.length < 10){
-			alert("El título de la tarea debe contener al menos 10 caracteres");
+			alert("El título debe contener al menos 10 caracteres");
 			campoTitulo.focus();
 			return false;
 		}
-		if(campoDetalles.value.length < 50){
-			alert("El detalle de la tarea debe contener al menos 50 caracteres");
-			campoNombre.focus();
+		else if(campoTitulo.value.length >= 45){
+			alert("El título debe contener menos de 45 caracteres");
+			campoTitulo.focus();
 			return false;
 		}
+		if(campoDetalles.value.length < 10){
+			alert("El detalle debe contener al menos 10 caracteres");
+			campoDetalles.focus();
+			return false;
+		}
+		//Validar que hayan usuarios seleccionados
+		var usuarios = document.getElementsByName("usuarios[]");
+		var usuariosSeleccionados = false;
+		var i;
+		for(i = 0; i < usuarios.length; i++){
+			//alert("dentro dle for"); Si existe alguna accion "checkeada", digamos qque
+			//contiene acciones y rompemos el ciclo
+			if(usuarios[i].checked == true){
+				usuariosSeleccionados = true;
+				break;
+			}
+		}
+		//Si no fue seleccionada ninguna accion
+		if(!usuariosSeleccionados){
+			alert("Esta intentando registrar una tarea sin ningún usuario seleccionado.\n"+
+						"Seleccione al menos un usuario de la lista de usuarios");
+			//Lanzar dialogo de confirmación para saber si desea registrarlo así
+			//y revisar la respuesta en un if
+			//if(confirm("Esta intentando registrar una actividad recurrente sin ningún usuario seleccionado."+
+			//			"Seleccione al menos un usuario de la lista de usuarios")){
+				//Si la respuesta es si, lanzar el metodo submit y retornar true
+				//document.formActiRecu.submit();
+				//return true;
+			//}
+			return false;//Si no dijo que sí, retrnar false;
+		}
 		document.formTareas.submit();
-		return true;
-	}		
+		//return true;
+	}
+	function setCheck(item){
+		if(item == '*'){
+			var usuarios = document.getElementsByName('usuarios[]');
+			var i;
+			for(i = 0; i < usuarios.length; i++)
+				usuarios[i].checked = true;
+			return true;
+		}else if(item == "!"){
+			var usuarios = document.getElementsByName('usuarios[]');
+			var i;
+			for(i = 0; i < usuarios.length; i++)
+				usuarios[i].checked = false;
+			return true;
+		}
+	    if(document.getElementById(item).checked)
+	        document.getElementById(item).checked = false;
+	    else
+	        document.getElementById(item).checked = true;
+		setFocus(item);
+	}
 </script>
 @endsection
