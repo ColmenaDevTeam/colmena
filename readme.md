@@ -33,9 +33,4 @@ Licencia Creative Commons Atribución-NoComercial 4.0 Internacional.
   [fd7cfbc1]: http://creativecommons.org/licenses/by-nc/4.0/ "Creative Commons 4.0"
 
 -------
-## Creditos:
 
-- Frameworks:
-    - [Laravel](https://laravel.com/)
-    - [Bootstrap](http://getbootstrap.com)
-- Plantilla HTML: [WebThemez](http://webthemez.com)
