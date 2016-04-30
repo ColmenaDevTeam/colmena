@@ -1,0 +1,9 @@
+[Desktop Entry]
+Comment=no comment
+Terminal=false
+Name=Colmena -SGTH
+Exec=google-chrome-stable http://colmena.cr
+Type=Application
+Icon=/home/elias/git/colmena-sgth/public/img/logo/logo-square.png
+Categories=Office;gtk;Qt;Gtk;
+Name[es_VE]=Colmena -SGTH [acceso directo]
