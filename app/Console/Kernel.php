@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\Inspire::class,
-        Commands\CactiRecuDaemond::class,
+        Commands\CactiRecuDaemon::class,
     ];
 
     /**

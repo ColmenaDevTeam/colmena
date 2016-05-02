@@ -41,7 +41,7 @@ class CactividadesRecurrentesController extends Controller{
 		$OactiRecu->tipFrec = $request->input("tipFrec");
 		$OactiRecu->tieEnt = $request->input("tieEnt");
 		$OactiRecu->fecIni = $request->input("fecIni");
-		$OactiRecu->ultLan = date("Y-m-d");
+		$OactiRecu->ultLan = NULL;
         //$OactiRecu->idUsu = $idUsu;
 		$OactiRecu->save();
 		$usuariosSeleccionados = $request->input("usuarios");

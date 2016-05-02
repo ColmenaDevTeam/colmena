@@ -17,7 +17,7 @@ class CreateTActiRecusTable extends Migration
         Schema::create('t_acti_recus', function (Blueprint $table) {
             $table->increments('idActRec');
             $table->string('titulo',45);
-            $table->enum('tipFrec',['Diario','Semanal','Mensual','Bimensual','Trimestral','Semestral']);
+            $table->enum('tipFrec',['Semanal','Mensual','Bimensual','Trimestral','Semestral']);
             $table->integer('tieEnt');
             $table->text('detalle');
             $table->integer('prioridad');

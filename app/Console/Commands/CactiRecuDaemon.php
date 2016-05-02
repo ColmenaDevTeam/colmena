@@ -8,13 +8,13 @@ use Illuminate\Console\Command;
 use Colmena\CactividadRecurrente as CactividadRecurrente;
 use Colmena\Ctarea as Ctarea;
 use Carbon\Carbon as Carbon;
-class CactiRecuDaemond extends Command
+class CactiRecuDaemon extends Command
 {
     /**
      * Nombre del comando
      * @var string
      */
-    protected $signature = 'colmena:acti_recu_daemond';
+    protected $signature = 'colmena:acti_recu_daemon';
 
     /**
      * Descripción del comando
@@ -35,29 +35,36 @@ class CactiRecuDaemond extends Command
      * @return mixed
      */
     public function handle(){
-//        $this->info('Infor');
-//        $this->error('Error');
-//        $this->line('Line');
         date_default_timezone_set('America/Caracas');
         $hoy = date('Y-m-d');
-        $this->info('HOY:');
-        $this->line($hoy);
         $actiRecus = $this->getActiRecusLanzables();
+        $this->info('Lanzables ('.count($actiRecus).')');
         foreach($actiRecus as $OactiRecu){
-            if($this->crearTarea($OactiRecu)){
+            $datos["titulo"] = $OactiRecu->titulo;
+            $datos["detalle"] = $OactiRecu->detalle;
+            $datos["prioridad"] = $OactiRecu->prioridad;
+            $datos["complejidad"] = $OactiRecu->complejidad;
+            $datos["tipTar"] = $OactiRecu->tipTar;
+
+            $fecEst =
+                Carbon::createFromFormat('Y-m-d', $hoy, 'America/Caracas')
+                ->addDays($OactiRecu->tieEnt);
+            $datos["fecEst"] = $fecEst;
+
+            Ctarea::crearMultiple($datos, $OactiRecu->usuariosAsignados);
                 $OactiRecu->ultLan = $hoy;
                 $OactiRecu->save();
-                $this->line('lanzado >> '.$OactiRecu->idActRec);
-            }
-//            $OactiRecu->ultLan = date();
-            $this->error('Lanzable: '.$OactiRecu->idActRec);
+            $this->info('Lanzada :: '.$OactiRecu->idActRec);
         }
     }
+    /**
+     * Método que retorna las actividad recurrentes lanzables para el día
+     * @return Array con las actividades recurrentes que toca lanzar el día de hoy
+     **/
     private function getActiRecusLanzables(){
         $lanzables = [];//new Collection([]);
         $hoy = date('Y-m-d');
-        $this->info('HOY:');
-        $this->line($hoy);
+        $this->line('HOY:'.$hoy);
         $actiRecus = CactividadRecurrente::all();
         foreach($actiRecus as $OactiRecu){
             //Si no se ha lanzado aún
@@ -65,52 +72,25 @@ class CactiRecuDaemond extends Command
                 || $OactiRecu->ultLan == ''
                 || $OactiRecu->ultLan == null){
                 //Si toca lanzarse hoy
+                $this->error('No ha sido lanzada :: '.$OactiRecu->idActRec);
                 if($OactiRecu->fecIni == $hoy){
                     $lanzables[] = $OactiRecu;
+                    $this->line('Lanzable :: '.$OactiRecu->idActRec);
                 }
             }
             //Si ya fue lanzada
             else{
+                $this->error('Ya fue lanzada :: '.$OactiRecu->idActRec);
                 $siguienteLanzamiento =
                     Carbon::createFromFormat('Y-m-d', $OactiRecu->ultLan, 'America/Caracas')
                     ->addDays($OactiRecu->getFrecuenciaEnDias());
-                //$this->info('Agregados: '.$OactiRecu->getFrecuenciaEnDias().'<>'.$siguienteLanzamiento);
                 if($siguienteLanzamiento->isToday()){
-                    //$this->info('Agregados: '.$OactiRecu->getFrecuenciaEnDias().'<>'.$siguienteLanzamiento);
+
                     $lanzables[] = $OactiRecu;
+                    $this->line('Lanzable :: '.$OactiRecu->idActRec);
                 }
-                //$this->info($OactiRecu->id.' ya se lanzó');
             }
         }
-        $a = Carbon::now('America/Caracas');
-        $this->info($a);
         return $lanzables;
     }
-    function crearTarea(CactividadRecurrente $OactiRecu){
-
-        return true;
-    }
 }
-/*
-function postRegistrar(Request $request){
-    if(!(\Auth::user()->tieneAccion('tareas.registrar')))
-        return redirect('errores/acceso-negado');
-    $Ousuarios=Cusuario::all();
-    //$oTarea=Ctarea::find($request->input("title"));
-    $Ousuario=Cusuario::findOrFail($request->input("responsable"));
-
-    $Otarea = New Ctarea;
-    $Otarea->titulo = $request->input("title");
-    $Otarea->fecEst = $request->input("deliverdate");
-    $Otarea->detalle = $request->input("details");
-    $Otarea->prioridad = $request->input("priority");
-    $Otarea->complejidad = $request->input("complexity");
-    $Otarea->estTar = 'Asignada';
-    $Otarea->tipTar = $request->input("tipoTarea");
-    $Otarea->idUsu = $Ousuario->idUsu;
-    $Otarea->save();
-    //Debe implementarse lo de abajo en un for cuando se implemente una tarea de envío multiples usuarios
-    CTarea::enviarEmailTareaAsignada($Otarea);
-    return redirect("tareas/registrar")->with(['Ousuarios'=>$Ousuarios, 'estado' => 'realizado']);
-}
-*/

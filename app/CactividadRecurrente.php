@@ -22,7 +22,6 @@ class CactividadRecurrente extends Model{
     }
     public function getFrecuenciaEnDias(){
         $opciones = [
-            'Diario'    => 1,
             'Semanal'   => 7,
             'Mensual'   => 30,
             'Bimensual' => 60,

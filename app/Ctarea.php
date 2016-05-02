@@ -39,4 +39,21 @@ class Ctarea extends Model
 EOD;
         return Mailer::enviar($Otarea->usuarioResponsable, $asunto, $mensaje);
     }
+
+    public static function crearMultiple($datos, $usuarios){
+        foreach ($usuarios as $Ousuario){
+            $Otarea = New Ctarea;
+            $Otarea->titulo = $datos["titulo"];
+            $Otarea->fecEst = $datos["fecEst"];
+            $Otarea->detalle = $datos["detalle"];
+            $Otarea->prioridad = $datos["prioridad"];
+            $Otarea->complejidad = $datos["complejidad"];
+            $Otarea->estTar = 'Asignada';
+            $Otarea->tipTar = $datos["tipTar"];
+            $Otarea->idUsu = $Ousuario->idUsu;
+            $Otarea->save();
+            CTarea::enviarEmailTareaAsignada($Otarea);
+        }
+        return;
+    }
 }
