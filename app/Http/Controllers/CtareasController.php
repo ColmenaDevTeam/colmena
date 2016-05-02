@@ -98,7 +98,7 @@ class CtareasController extends Controller
     public function postRegistrar(Request $request){
         if(!(\Auth::user()->tieneAccion('tareas.registrar')))
             return redirect('errores/acceso-negado');
-    	$idsUsuarios = input('usuarios');
+    	$idsUsuarios = $request->input('usuarios');
 
         foreach ($idsUsuarios as $idUsuario) {
             $Otarea = New Ctarea;
@@ -113,7 +113,7 @@ class CtareasController extends Controller
             $Otarea->save();
             CTarea::enviarEmailTareaAsignada($Otarea);
         }
-
+        $usuarios = Cusuario::getUsuariosPorGrado();
         return redirect("tareas/registrar")->with(['usuarios'=>$usuarios, 'estado' => 'realizado']);
     }
     public function getModificar(Request $request, $idTarea = -1){

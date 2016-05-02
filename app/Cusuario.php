@@ -49,7 +49,7 @@ class Cusuario extends Authenticatable
     	return $this->hasMany('app\TEncargados');
     }*/
 
-    public static function getUsuarioPorGrado(){
+    public static function getUsuariosPorGrado(){
       function ordenaPorGrado(){
 
         if ($a->getGradoOcupacion() == $b->getGradoOcupacion()) {
@@ -59,7 +59,7 @@ class Cusuario extends Authenticatable
 
       }
 
-      $usuarios = Ccusuario::all();
+      $usuarios = Cusuario::all();
       usort($usuarios, "ordenaPorGrado");
       return $usuarios;
     }

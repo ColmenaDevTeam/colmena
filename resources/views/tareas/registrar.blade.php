@@ -51,7 +51,7 @@
 						   				<option value="1">Baja</option>
 						   				<option value="2">Media</option>
 						   				<option value="3">Alta</option>
-									</select> 
+									</select>
 								</div>
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -61,10 +61,10 @@
 						   				<option value="1">Baja</option>
 						   				<option value="2">Media</option>
 						   				<option value="3">Alta</option>
-									</select> 
+									</select>
 								</div>
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
-							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">													
+							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 								<div class="form-group has-feedback">
 									<label for="birthdate">Fecha de Entrega</label>
 									<input type="date" class="form-control" id="deliverdate" name="deliverdate" required>
@@ -81,7 +81,7 @@
 						   				<option value="Administrativo-Docente">Administrativo-Docente</option>
 						   				<option value="Produccion">Produccion</option>
 						   				<option value="Administrativas">Administrativas</option>
-									</select> 
+									</select>
 								</div>
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
 						</div><!-- -/.row-->
@@ -130,8 +130,8 @@
 <script language="JavaScript" type="text/javascript">
 	function validar(){
 		//Validar el nombre
-		var campoTitulo = document.getElementById("titulo");
-		var campoDetalles = document.getElementById('detalle');
+		var campoTitulo = document.getElementById("title");
+		var campoDetalles = document.getElementById('details');
 		if(campoTitulo.value.length < 10){
 			alert("El título debe contener al menos 10 caracteres");
 			campoTitulo.focus();
@@ -194,7 +194,8 @@
 	        document.getElementById(item).checked = false;
 	    else
 	        document.getElementById(item).checked = true;
-		setFocus(item);
+		//setFocus(item);
+		item.focus();
 	}
 </script>
 @endsection
