@@ -39,7 +39,7 @@
 					</p>
 
 				</div>
-				<a href="https://docs.google.com/document/d/1VQ2A0gzgTp4raKBAiwCNRUCl_5GhKQ5mQFI5X7e82XE/edit?usp=sharing" target="_blank"class="btn btn-color">Leer más</a>
+				<a href="https://github.com/ColmenaDevTeam/colmena-sgth/blob/master/Documentacion/informe.pdf" target="_blank"class="btn btn-color">Leer más</a>
 			</div>
 		</div><!-- /.row-->
 		<hr>
@@ -138,8 +138,8 @@
 					El sistema, de entorno web, está desarrollado en PHP, HTML5 y Javascript con la integración de los Frameworks Laravel,
 					Bootstrap y JQuery<br>
 					Si desea saber más acerca del desarrollo visite el
-					<a href="https://bitbucket.org/colmenadevteam/colmena-sgth/overview"><span class="highlight">repositorio central del royecto</span></a>
-					o pongase en contacto con <a href="https://bitbucket.org/colmenadevteam/profile/members"><span class="highlight">el equípo de desarrollo.</span></a>
+					<a href="https://github.com/ColmenaDevTeam/colmena-sgth#readme"><span class="highlight">repositorio central del royecto</span></a>
+					o pongase en contacto con <a href="https://github.com/orgs/ColmenaDevTeam/people"><span class="highlight">el equípo de desarrollo.</span></a>
 				</p>
 			</div><!-- /.col-xs-12 col-sm-4 col-md-4 col-lg-4-->
 
@@ -149,10 +149,9 @@
 					<h3><span>Enlaces de interes</span></h3>
 				</div>
 				<ul>
-					<h3><li><a target="_blank" href="https://bitbucket.org/colmenadevteam/colmena-sgth/wiki/Home">Manual de Usuario (Wiki)</a></li></h3>
-					<h3><li><a target="_blank" href="https://bitbucket.org/colmenadevteam/colmena-sgth/downloads">Descargas</a></li></h3>
-					<h3><li><a target="_blank" href="https://bitbucket.org/colmenadevteam/colmena-sgth/overview">Repositorio del Proyecto</a></li></h3>
-					<h3><li><a target="_blank" href="https://bitbucket.org/colmenadevteam/colmena-sgth/issues?status=new&status=open">Reportes fallas o incidencias</a></li></h3>
+					<h3><li><a target="_blank" href="https://github.com/ColmenaDevTeam/colmena-sgth/wiki">Manual de Usuario (Wiki)</a></li></h3>
+					<h3><li><a target="_blank" href="https://github.com/ColmenaDevTeam/colmena-sgth">Repositorio del Proyecto</a></li></h3>
+					<h3><li><a target="_blank" href="https://github.com/ColmenaDevTeam/colmena-sgth/issues">Reportes fallas o incidencias</a></li></h3>
 				</ul>
 			</div><!-- /.col-xs-12 col-sm-4 col-md-4 col-lg-4-->
 		</div><!-- /.row-->

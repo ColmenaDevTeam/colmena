@@ -3,7 +3,8 @@
 
 ## Descripción:
 
-SISTEMA AUTOMATIZADO PARA LA GESTIÓN DEL TALENTO HUMANO DEL DEPARTAMENTO DE PROGRAMA NACIONAL DE FORMACION EN INFORMATICA EN LA UNIVERSIDAD POLITÉCNICA TERRITORIAL ANDRÉS ELOY BLANCO
+Sistema Automatizado para la Gestión de Talento Humano del Departamento del Programa Nacional
+de Formación en Informática en la Universidad Politécnica Territorial Andrés Eloy Blanco
 
 
 ## Documentación:
@@ -13,10 +14,10 @@ SISTEMA AUTOMATIZADO PARA LA GESTIÓN DEL TALENTO HUMANO DEL DEPARTAMENTO DE PRO
 * [Manual de Usuario PDF][9030221f]
 * [Wiki (Manual de Usuario en Línea)][554b66de]
 
-  [507e4e67]: https://docs.google.com/document/d/1VQ2A0gzgTp4raKBAiwCNRUCl_5GhKQ5mQFI5X7e82XE/edit?usp=sharing "Informe del Proyecto"
-  [0e226033]: https://docs.google.com/document/d/1Iw5N11WvvKNrpj1l_dXa1q6-5aWRJ54mLsQ1GDoVFZk/edit?usp=sharing "Especificación de Requisito de Software (SRS)"
+  [507e4e67]: https://github.com/ColmenaDevTeam/colmena-sgth/blob/master/Documentacion/informe.pdf "Informe del Proyecto"
+  [0e226033]: https://github.com/ColmenaDevTeam/colmena-sgth/blob/master/Documentacion/SRS.pdf "Especificación de Requisito de Software (SRS)"
   [9030221f]: # "Manual de Usuario PDF"
-  [554b66de]: https://bitbucket.org/tesoner/colmena-sgth/wiki/Home "Manual de Usuario en Línea"
+  [554b66de]: https://github.com/ColmenaDevTeam/colmena-sgth/wiki "Manual de Usuario en Línea"
 
 
 ## Autores:
@@ -33,4 +34,3 @@ Licencia Creative Commons Atribución-NoComercial 4.0 Internacional.
   [fd7cfbc1]: http://creativecommons.org/licenses/by-nc/4.0/ "Creative Commons 4.0"
 
 -------
-
