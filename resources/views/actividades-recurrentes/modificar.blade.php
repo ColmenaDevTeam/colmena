@@ -145,7 +145,6 @@
 								<div class="form-group has-feedback">
 									<label for="name">Tipo de frecuencia</label>
 									<select name="tipFrec" id="tipFrec" class="form-control">
-						   				<option value="Diario" {{($OactiRecu->tipFrec == "Diario") ? 'selected':''}}>Diario</option>
 						   				<option value="Semanal" {{($OactiRecu->tipFrec == "Semanal") ? 'selected':''}}>Semanal</option>
 						   				<option value="Mensual" {{($OactiRecu->tipFrec == "Mensual") ? 'selected':''}}>Mensual</option>
 						   				<option value="Bimensual" {{($OactiRecu->tipFrec == "Bimensual") ? 'selected':''}}>Bimensual</option>
@@ -167,13 +166,18 @@
 									</span>
 								</div>
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
+							<?= $sinLanzar = ($OactiRecu->ultLan == '0000-00-00' || $OactiRecu->ultLan == '' || $OactiRecu->ultLan == null || $OactiRecu->ultLan == NULL)?>
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 								<div class="form-group has-feedback">
 									<label for="name">Fecha de nuevo lanzamiento</label>
-									<input type="date" class="form-control" id="fecIni" name="fecIni" placeholder="" required value="{{$OactiRecu->fecIni}}">
+									<input type="date" class="form-control" {{($sinLanzar) ? '':'readonly="readonly"'}}id="fecIni" name="fecIni" required value="{{$OactiRecu->fecIni}}">
 									<i class="fa fa-pencil form-control-feedback"></i>
 									<span class="block-info">
-										Si no se desea una nueva fecha de primer lanzamiento, se debe dejar la mismas
+										@if($sinLanzar)
+											Si no se desea una nueva fecha de primer lanzamiento, se debe dejar la mismas.
+										@else
+											Si la actividad ya fue lanzada por primera vez, no puede modificarse la fecha de lanzamiento
+										@endif
 									</span>
 								</div>
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->

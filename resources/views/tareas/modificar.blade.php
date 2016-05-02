@@ -18,10 +18,10 @@
 			<div class="col-md-12">
 				<p>Ingrese los datos de la nueva tarea:</p>
 				<div class="alert alert-success hidden" id="contactSuccess">
-					<strong>Completado!</strong> Tu tarea ha sido modificada.
+					<strong>Completado!</strong> La tarea ha sido modificada.
 				</div>
 				<div class="alert alert-error hidden" id="contactError">
-					<strong>Error!</strong> Ocurrió un problema al actualizar tu tarea.
+					<strong>Error!</strong> Ocurrió un problema al modificar la tarea.
 				</div>
 			</div><!-- /.col-md-1-->
 		</div><!-- /..row-->
@@ -188,6 +188,6 @@
 		}
 		document.formTareas.submit();
 		return true;
-	}		
+	}
 </script>
 @endsection

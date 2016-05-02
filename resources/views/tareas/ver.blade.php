@@ -105,7 +105,7 @@
 			</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
 		</div><!-- -/.row-->
 		<hr>
-		<div class"col-xs-12 col-sm-12 col-md-12 col-lg-12"><h1>Bitacora</h1></div>
+		<div class"col-xs-12 col-sm-12 col-md-12 col-lg-12"><h1>Bitácora</h1></div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="table-responsive">

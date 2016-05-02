@@ -73,7 +73,7 @@
 								</div>
 							</td>
 							<td align="center">{{$Otarea->fecEst}}</td>
-							<td align="center"><div style='width:100px; overflow:hidden;'>{{$Otarea->detalle}}</div></td>
+							<td align="center"><div style='width:100px; overflow:hidden;'>{{$Otarea->getDetalleAcortado()}}</div></td>
 							@if ($Otarea->prioridad==1)
 								<td align="center">Baja</td>
 							@elseif ($Otarea->prioridad==2)
@@ -101,7 +101,7 @@
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<input type="hidden" name="idTar" value="{{$Otarea->idTar}}" name="idTar">
 								<td align="center">
-									<button id="deleteTar" class="btn" onclick="submit()">
+									<button id="deleteTar" class="btn" onClick="confirmarEliminar('borrarTar');">
 										<i class="fa fa-times" value="Eliminar"></i>
 									</button>
 								</td>

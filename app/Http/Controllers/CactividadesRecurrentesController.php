@@ -62,6 +62,8 @@ class CactividadesRecurrentesController extends Controller{
 		return view("actividades-recurrentes.listar")->with('actiRecus',$actiRecus);
 	}
 	public function getVer(Request $request, $idActRec){
+		if(!Auth::user()->tieneAccion('actividades_recurrentes.listar'))
+            return redirect('errores/acceso-negado');
 		$OactiRecu = CactividadRecurrente::find($idActRec);
 		if($OactiRecu)
 			return view('actividades-recurrentes/ver')->with('OactiRecu', $OactiRecu);

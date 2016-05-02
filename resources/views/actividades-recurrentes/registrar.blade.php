@@ -87,7 +87,6 @@
 								<div class="form-group has-feedback">
 									<label for="name">* Tipo de frecuencia</label>
 									<select name="tipFrec" id="" class="form-control">
-						   				<option value="Diario">Diario</option>
 						   				<option value="Semanal">Semanal</option>
 						   				<option value="Mensual">Mensual</option>
 						   				<option value="Bimensual">Bimensual</option>
@@ -115,7 +114,7 @@
 									<input type="date" class="form-control" id="fecIni" name="fecIni" placeholder="" required value="">
 									<i class="fa fa-pencil form-control-feedback"></i>
 									<span class="block-info">
-										Si se omite, se tomará el día de hoy
+										Fecha del primer lanzamiento de la actividad recurrente
 									</span>
 								</div>
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
@@ -205,22 +204,17 @@
 		}
 		//Si no fue seleccionada ninguna accion
 		if(!usuariosSeleccionados){
-			alert("Esta intentando registrar una actividad recurrente sin ningún usuario seleccionado.\n"+
-						"Seleccione al menos un usuario de la lista de usuarios");
-			//Lanzar dialogo de confirmación para saber si desea registrarlo así
-			//y revisar la respuesta en un if
-			//if(confirm("Esta intentando registrar una actividad recurrente sin ningún usuario seleccionado."+
-			//			"Seleccione al menos un usuario de la lista de usuarios")){
-				//Si la respuesta es si, lanzar el metodo submit y retornar true
-				//document.formActiRecu.submit();
-				//return true;
-			//}
-			return false;//Si no dijo que sí, retrnar false;
+			alert("Seleccione al menos un usuario de la lista de usuarios");
+			return false;
 		}
 		//validar tiempo de entrega
 		var tiempoEntrega = document.getElementById("tieEnt");
 		if(tiempoEntrega.value < 1 || tiempoEntrega.value > 365){
 			alert('El tiempo de entrega debe ser un número entre 1 y 365 días');
+			return false;
+		}
+		var fechaIni = document.getElementById('fecIni');
+		if(!validarFecha(fechaIni.value, 'Fecha de primer lanzamiento')){
 			return false;
 		}
 		document.formActiRecu.submit();
@@ -244,7 +238,8 @@
 	        document.getElementById(item).checked = false;
 	    else
 	        document.getElementById(item).checked = true;
-		setFocus(item);
+		//setFocus(item);
+		item.focus;
 	}
 </script>
 @endsection

@@ -1,7 +1,7 @@
 <?php
-/*
-Author:QSoto
-*/
+/**
+ * @author: konh
+ */
 namespace Colmena;
 
 use Illuminate\Database\Eloquent\Model;
@@ -55,5 +55,9 @@ EOD;
             CTarea::enviarEmailTareaAsignada($Otarea);
         }
         return;
+    }
+    public function getDetalleAcortado($numCaracteres = 25){
+        return (strlen($this->detalle) <= $numCaracteres) ?
+            $this->detalle : substr($this->detalle,0,$numCaracteres-3).'...';
     }
 }

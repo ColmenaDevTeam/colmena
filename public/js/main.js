@@ -8,3 +8,10 @@ function confirmarEliminar(formId){
     }
     return false;
 }
+function validarFecha(fecha, nombreItem){
+    if(fecha == '' || fecha == null || fecha == 'dd/mm/aaaa' || fecha == 'aa/mm/dd'){
+        alert(nombreItem+' está vacío');
+        return false;
+    }
+    return true;
+}

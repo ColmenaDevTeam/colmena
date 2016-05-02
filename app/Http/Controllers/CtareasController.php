@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @author: konh
+ */
 namespace Colmena\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,20 +11,10 @@ use Colmena\Http\Controllers\Controller;
 use Colmena\Ctarea;
 use Colmena\CBitaTarea;
 use Auth;
-use DB;
 use Illuminate\Pagination\LengthAwarePaginator;
-
-//Borrar lo siguiente cuando deje de usarse;
-use Faker\Factory as Faker;
 
 class CtareasController extends Controller
 {
-/**
-En los metodos por ruta se antepone el tipo de peticion http. Ej getNombreMetodo
-postNombreMetodo etc. Y eso en las rutas se manejará como en minuscula de ma-
-nera que queden así, x ej: colmena.cr/modulo/listar ... que hace referen-
-cia al metodo getListar del controlador de ese modulo.
-*/
     public function __construct(){
         $this->middleware("auth");
     }
@@ -35,7 +27,7 @@ cia al metodo getListar del controlador de ese modulo.
                 //Y si tiene la accion de listar tareas, se listan todas
                 $tareas=Ctarea::all();
         }
-        //Si por SÍ se está pasando un usuario
+        //Si SÍ se está pasando un usuario
         else{
             //Si son sus propias tareas
             if($idUsu == Auth::user()->idUsu){
@@ -47,16 +39,13 @@ cia al metodo getListar del controlador de ese modulo.
                 if(!(Auth::user()->tieneAccion('tareas.listar')))
                     return redirect('errores/acceso-negado');
                 //si SÍ puede listar, se listan las tareas de el usuario requerido
-                //$user = Cusuario::find($idUsu);
-                if($user)
+                $Ousuario = Cusuario::find($idUsu);
+                if($Ousuario)
                     $tareas = Ctarea::where('idUsu', $idUsu)->get();
                 else
                     return view('tareas.listar')->with('estado', 'error')->with('tareas', null);
             }
         }
-        //Esto acá hay que mejorarlo, hay que ver cual es el error de las relaciones del ORM, reparar y usar
-        foreach($tareas as $Otarea)
-            $Otarea->usuarioResponsable = Cusuario::findOrFail($Otarea->idUsu);
         return view("tareas.listar")->with('tareas',$tareas);
     }
     public function getVer(Request $request, $idTar){
@@ -98,10 +87,6 @@ cia al metodo getListar del controlador de ese modulo.
 
         $arrEstados = ['Asignada','Revision','Cumplida','Cancelada','Diferida','Retrasada'];
         return redirect('tareas/listar')->with('estado', 'realizado');
-        //return view("tareas.bitacora")->with('Otarea', $Otarea)
-            //->with('estado', 'realizado')
-            //->with('arrEstados', $arrEstados);
-        //return $Otarea;
     }
     public function getRegistrar(){
         if(!(\Auth::user()->tieneAccion('tareas.registrar')))
@@ -126,32 +111,11 @@ cia al metodo getListar del controlador de ese modulo.
             $Otarea->tipTar = $request->input("tipoTarea");
             $Otarea->idUsu = $idUsuario;
             $Otarea->save();
+            CTarea::enviarEmailTareaAsignada($Otarea);
         }
-        CTarea::enviarEmailTareaAsignada($Otarea);
+
         return redirect("tareas/registrar")->with(['usuarios'=>$usuarios, 'estado' => 'realizado']);
     }
-    /*public function postRegistrarNew(Request $request){
-        if(!(\Auth::user()->tieneAccion('tareas.registrar')))
-            return redirect('errores/acceso-negado');
-        $Ousuarios=Cusuario::all();
-        //$oTarea=Ctarea::find($request->input("title"));
-        $Ousuario=Cusuario::findOrFail($request->input("responsable"));
-
-        $Otarea = New Ctarea;
-        $Otarea->titulo = $request->input("title");
-        $Otarea->fecEst = $request->input("deliverdate");
-        $Otarea->detalle = $request->input("details");
-        $Otarea->prioridad = $request->input("priority");
-        $Otarea->complejidad = $request->input("complexity");
-        $Otarea->estTar = 'Asignada';
-        $Otarea->tipTar = $request->input("tipoTarea");
-        $Otarea->idUsu = $Ousuario->idUsu;
-        $Otarea->save();
-        //Debe implementarse lo de abajo en un for cuando se implemente una tarea de envío multiples usuarios
-        CTarea::enviarEmailTareaAsignada($Otarea);
-        return redirect("tareas/registrar")->with(['Ousuarios'=>$Ousuarios, 'estado' => 'realizado']);
-    }
-    */
     public function getModificar(Request $request, $idTarea = -1){
         if(!(\Auth::user()->tieneAccion('tareas.modificar')))
             return redirect('errores/acceso-negado');
@@ -208,9 +172,8 @@ cia al metodo getListar del controlador de ese modulo.
         $tareas=Ctarea::all();
         foreach($tareas as $tarea){
             $tarea->usuarioResponsable = Cusuario::findOrFail($tarea->idUsu);
-            //La anterior es la  linea que tienes que copiar y adaptar
         }
-        return view("tareas.listar")->with('tareas',$tareas);
+        return redirect("tareas/listar")->with('tareas',$tareas);
     }
 
 }
