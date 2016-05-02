@@ -8,7 +8,6 @@ Actividades recurrentes:
 Footer:
     Organizar los imports de JS
 About:
-    Actualizar referencias
 
 Mailer:
     Reabilitarlo

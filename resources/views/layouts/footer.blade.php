@@ -67,6 +67,11 @@
                         </a>
                     </li>
                     <li>
+                        <a target="_blank" href="https://github.com/ColmenaDevTeam/colmena-sgth/stargazers" data-placement="top" title="Calificar Colmena -SGTH con una estrella">
+                            <i class="fa fa-star-half-full"></i>
+                        </a>
+                    </li>
+                    <li>
                         <a href="/acerca-de" data-placement="top" title="Acerca De Colmena -SGTH">
                             <i class="fa fa-info-circle"></i>
                         </a>
