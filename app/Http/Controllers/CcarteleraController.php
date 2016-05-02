@@ -20,6 +20,7 @@ class CcarteleraController extends Controller
         $this->middleware("auth");
     }
     public function getIndex(){
+        date_default_timezone_set('America/Caracas');
         $topHoy = [];
         $pendientes = [];
         $cumpleanieros = [];
@@ -34,8 +35,8 @@ class CcarteleraController extends Controller
             $permisosReposos = CpermRepo::all();
         //Ver los cumpleaños
         foreach($usuarios as $Ousuario){
-            $OfechaNacimiento = Carbon::createFromFormat('Y-m-d', $Ousuario->fecNac);
-            $OfechaHoy = Carbon::now();
+            $OfechaNacimiento = Carbon::createFromFormat('Y-m-d', $Ousuario->fecNac, 'America/Caracas');
+            $OfechaHoy = Carbon::now('America/Caracas');
             $OfechaNacimiento->year = $OfechaHoy->year;
             //En las siguientes linea el 5 representa el numero maximo de dias a partir de el actual
             //que se tomara en cuenta para mostrar
@@ -59,9 +60,9 @@ class CcarteleraController extends Controller
                 $tarea->idTag = 'Tar'.$i;
                 $tarea->usuario = Cusuario::findOrFail($tarea->idUsu);
 
-                $fechaEstimada = Carbon::createFromFormat('Y-m-d', $tarea->fecEst);
+                $fechaEstimada = Carbon::createFromFormat('Y-m-d', $tarea->fecEst, 'America/Caracas');
                 $diasTotales = $tarea->created_at->diffInDays($fechaEstimada);
-                $diasTranscurridos = $tarea->created_at->diffInDays(Carbon::now());
+                $diasTranscurridos = $tarea->created_at->diffInDays(Carbon::now('America/Caracas'));
                 $tarea->porcentaje = 0;
                 if($diasTranscurridos > 0 && $diasTotales > 0)
                     $tarea->porcentaje = ($diasTranscurridos*100)/$diasTotales;
@@ -87,13 +88,13 @@ class CcarteleraController extends Controller
                 $permiRepo->idTag = "Rep".$i;
             $permiRepo->usuario = Cusuario::findOrFail($permiRepo->idUsu);
 
-            $fechaInicio = Carbon::createFromFormat('Y-m-d', $permiRepo->fecIni);
-            $fechaFin = Carbon::createFromFormat('Y-m-d', $permiRepo->fecFin);
+            $fechaInicio = Carbon::createFromFormat('Y-m-d', $permiRepo->fecIni, 'America/Caracas');
+            $fechaFin = Carbon::createFromFormat('Y-m-d', $permiRepo->fecFin, 'America/Caracas');
             if($fechaFin->isPast() || $fechaFin->isToday())
                 continue;
             $diasTotales = $fechaInicio->diffInDays($fechaFin);
 
-            $diasTranscurridos = $fechaInicio->diffInDays(Carbon::now());
+            $diasTranscurridos = $fechaInicio->diffInDays(Carbon::now('America/Caracas'));
             $porcentaje = 0;
             if($diasTranscurridos > 0 && $diasTotales > 0)
                 $porcentaje = ($diasTranscurridos*100)/$diasTotales;
