@@ -4,9 +4,6 @@ Actividades recurrentes:
 Footer:
     Organizar los imports de JS
 
-Mailer:
-    Reabilitarlo
-    Mejorar el manejo de errores
 
 Cartelera:
     Poner timezone America\Caracas a las fechas
