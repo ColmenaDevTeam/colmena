@@ -14,8 +14,8 @@ de Formación en Informática en la Universidad Politécnica Territorial Andrés
 * [Manual de Usuario PDF][9030221f]
 * [Wiki (Manual de Usuario en Línea)][554b66de]
 
-  [507e4e67]: https://github.com/ColmenaDevTeam/colmena-sgth/blob/master/Documentacion/informe.pdf "Informe del Proyecto"
-  [0e226033]: https://github.com/ColmenaDevTeam/colmena-sgth/blob/master/Documentacion/SRS.pdf "Especificación de Requisito de Software (SRS)"
+  [507e4e67]: https://github.com/ColmenaDevTeam/colmena-sgth/blob/master/documentacion/informe.pdf "Informe del Proyecto"
+  [0e226033]: https://github.com/ColmenaDevTeam/colmena-sgth/blob/master/documentacion/SRS.pdf "Especificación de Requisito de Software (SRS)"
   [9030221f]: # "Manual de Usuario PDF"
   [554b66de]: https://github.com/ColmenaDevTeam/colmena-sgth/wiki "Manual de Usuario en Línea"
 

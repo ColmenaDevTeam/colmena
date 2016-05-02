@@ -5,7 +5,6 @@
 * Enlaces de referencia a licencias
 * Enlaces de referencia a reporte de fallas
 * Enlaces de referencia al repositorio del proyecto
-* Enlaces de referencia al equipo de desarrollo
 -->
 @extends("layouts.main_layout")
 @section("contenido")
@@ -39,7 +38,7 @@
 					</p>
 
 				</div>
-				<a href="https://github.com/ColmenaDevTeam/colmena-sgth/blob/master/Documentacion/informe.pdf" target="_blank"class="btn btn-color">Leer más</a>
+				<a href="https://github.com/ColmenaDevTeam/colmena-sgth/blob/master/documentacion/informe.pdf" target="_blank"class="btn btn-color">Leer más</a>
 			</div>
 		</div><!-- /.row-->
 		<hr>
@@ -138,8 +137,8 @@
 					El sistema, de entorno web, está desarrollado en PHP, HTML5 y Javascript con la integración de los Frameworks Laravel,
 					Bootstrap y JQuery<br>
 					Si desea saber más acerca del desarrollo visite el
-					<a href="https://github.com/ColmenaDevTeam/colmena-sgth#readme"><span class="highlight">repositorio central del royecto</span></a>
-					o pongase en contacto con <a href="https://github.com/orgs/ColmenaDevTeam/people"><span class="highlight">el equípo de desarrollo.</span></a>
+					<a target="_blank" href="https://github.com/ColmenaDevTeam/colmena-sgth#readme"><span class="highlight">repositorio central del royecto</span></a>
+					o pongase en contacto con <a target="_blank" href="https://github.com/orgs/ColmenaDevTeam/people"><span class="highlight">el equípo de desarrollo.</span></a>
 				</p>
 			</div><!-- /.col-xs-12 col-sm-4 col-md-4 col-lg-4-->
 
@@ -169,9 +168,13 @@
 					<!-- Team Member -->
 					<div class="team-member">
 						<!-- Image -->
-						<!--<img class="img-responsive" src="img/team2.jpg" alt="">-->
+						<img class="img-responsive img-rounded" src="/img/equipo/konh.jpg" alt="">
 						<!-- Name -->
 						<h4>Hidalgo Victor</h4>
+						<a target="_blank"href="https://www.facebook.com/Krunnt">
+							<i class="fa fa-facebook-square"></i>
+							@konh
+						</a><hr>
 						<span class="deg">Analista, Programador, Diseñador</span>
 					</div>
 				</div>
@@ -179,9 +182,13 @@
 					<!-- Team Member -->
 					<div class="team-member">
 						<!-- Image -->
-						<!--<img class="img-responsive" src="img/team3.jpg" alt="">-->
+						<img class="img-responsive img-rounded" src="/img/equipo/tes1oner.jpg" alt="">
 						<!-- Name -->
 						<h4>Peraza Elias</h4>
+						<a target="_blank"href="https://twitter.com/tes1oner">
+							<i class="fa fa-twitter"></i>
+							@tes1oner
+						</a><hr>
 						<span class="deg">Analista, Programador, Diseñador</span>
 					</div>
 				</div>
@@ -189,10 +196,28 @@
 					<!-- Team Member -->
 					<div class="team-member">
 						<!-- Image -->
-						<!--<img class="img-responsive" src="img/team4.jpg" alt="">-->
+						<img class="img-responsive img-rounded" src="/img/equipo/qsoto.jpg" alt="">
 						<!-- Name -->
 						<h4>Soto Quintin</h4>
+						<a target="_blank"href="https://twitter.com/BlueQasv">
+							<i class="fa fa-twitter"></i>
+							@qsoto
+						</a><hr>
 						<span class="deg">Analista, Programador, Diseñador</span>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-4">
+					<!-- Team Member -->
+					<div class="team-member">
+						<!-- Image -->
+						<img class="img-responsive img-rounded" src="/img/equipo/csoto.jpg" alt="">
+						<!-- Name -->
+						<h4>Soto Carlos</h4>
+						<a href="#">
+							<i class="fa fa-user-times"></i>
+							N/D
+						</a><hr>
+						<span class="deg">Tutor Comunitario</span>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-4">
@@ -203,16 +228,6 @@
 						<!-- Name -->
 						<h4>Rodríguez Noretsys</h4>
 						<span class="deg">Tutora Academica</span>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-4">
-					<!-- Team Member -->
-					<div class="team-member">
-						<!-- Image -->
-						<!--<img class="img-responsive" src="img/team1.jpg" alt="">-->
-						<!-- Name -->
-						<h4>Soto Carlos</h4>
-						<span class="deg">Tutor Comunitario</span>
 					</div>
 				</div>
 			</div>
