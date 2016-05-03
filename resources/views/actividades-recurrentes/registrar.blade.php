@@ -79,7 +79,6 @@
 						   				<option value="Integracion Social">Integracion Social</option>
 						   				<option value="Administrativo-Docente">Administrativo-Docente</option>
 						   				<option value="Produccion">Produccion</option>
-						   				<option value="Desarrollo personal">Desarrollo personal</option>
 									</select>
 								</div>
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->

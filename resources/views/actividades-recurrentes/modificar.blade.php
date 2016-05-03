@@ -101,42 +101,30 @@
 											<option value="Integracion Social">Integracion Social</option>
 											<option value="Administrativo-Docente">Administrativo-Docente</option>
 											<option value="Produccion">Produccion</option>
-											<option value="Administrativas">Administrativas</option>
 										@elseif ($OactiRecu->tipTar=='Creacion intelectual')
 											<option value="Academico-Docente">Academico-Docente</option>
 											<option selected="selected" value="Creacion intelectual">Creacion intelectual</option>
 											<option value="Integracion Social">Integracion Social</option>
 											<option value="Administrativo-Docente">Administrativo-Docente</option>
 											<option value="Produccion">Produccion</option>
-											<option value="Administrativas">Administrativas</option>
 										@elseif ($OactiRecu->tipTar=='Integracion Social')
 											<option value="Academico-Docente">Academico-Docente</option>
 											<option value="Creacion intelectual">Creacion intelectual</option>
 											<option selected="selected" value="Integracion Social">Integracion Social</option>
 											<option value="Administrativo-Docente">Administrativo-Docente</option>
 											<option value="Produccion">Produccion</option>
-											<option value="Administrativas">Administrativas</option>
 										@elseif ($OactiRecu->tipTar=='Administrativo-Docente')
 											<option value="Academico-Docente">Academico-Docente</option>
 											<option value="Creacion intelectual">Creacion intelectual</option>
 											<option value="Integracion Social">Integracion Social</option>
 											<option selected="selected" value="Administrativo-Docente">Administrativo-Docente</option>
 											<option value="Produccion">Produccion</option>
-											<option value="Administrativas">Administrativas</option>
 										@elseif ($OactiRecu->tipTar=='Produccion')
 											<option value="Academico-Docente">Academico-Docente</option>
 											<option value="Creacion intelectual">Creacion intelectual</option>
 											<option value="Integracion Social">Integracion Social</option>
 											<option value="Administrativo-Docente">Administrativo-Docente</option>
 											<option selected="selected" value="Produccion">Produccion</option>
-											<option value="Administrativas">Administrativas</option>
-										@elseif ($OactiRecu->tipTar=='Administrativas')
-											<option value="Academico-Docente">Academico-Docente</option>
-											<option value="Creacion intelectual">Creacion intelectual</option>
-											<option value="Integracion Social">Integracion Social</option>
-											<option value="Administrativo-Docente">Administrativo-Docente</option>
-											<option value="Produccion">Produccion</option>
-											<option value="Administrativas">Administrativas</option>
 										@endif
 									</select>
 								</div>
