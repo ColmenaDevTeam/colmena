@@ -19,20 +19,30 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<p> </p>
-						@if(session('estado')=='realizado')
+						@if(session('estado')=='registrada')
 							<div class="alert alert-success alert-dismissable">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<strong>¡Muy bien!</strong> La tarea ha sido registrada o modificada con exito.
+								<strong>¡Muy bien!</strong> La tarea ha sido registrada con exito.
 							</div>
+						@elseif(session('estado')=='modificada')
+							<div class="alert alert-info">
+								<strong>¡Muy Bien!</strong> La tarea ha sido modificada con exito.
+							</div>						
 						@elseif(session('estado')=='no-seleccionado')
 							<div class="alert alert-info">
 								<strong>Información:</strong>
 								Usted no ha seleccionado ningún elemento para editar o modificar.
 								Presione el boton eliminar o modificar de ún elemento para seleccionarlo
 							</div>
+						@elseif(session('estado')=='incidencia')
+							<div class="alert alert-info">
+								<strong>¡Muy Bien!</strong> La incidencia ha sido agregada con exito.
+							</div>
+						@elseif(session('estado')=='eliminada')
+							<div class="alert alert-info">
+								<strong>¡Muy Bien!</strong> La tarea ha sido eliminada con exito.
+							</div>
 						@else
 							<div class="alert alert-danger alert-dismissable">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
 								<strong>¡Error!</strong> Ocurrió un error al registrar. Por favor intentelo de nuevo
 							</div>
 						@endif

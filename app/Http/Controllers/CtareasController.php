@@ -86,7 +86,7 @@ class CtareasController extends Controller
         $Obitacora->save();
 
         $arrEstados = ['Asignada','Revision','Cumplida','Cancelada','Diferida','Retrasada'];
-        return redirect('tareas/listar')->with('estado', 'realizado');
+        return redirect('tareas/listar')->with('estado', 'incidencia');
     }
     public function getRegistrar(){
         if(!(\Auth::user()->tieneAccion('tareas.registrar')))
@@ -114,7 +114,7 @@ class CtareasController extends Controller
             CTarea::enviarEmailTareaAsignada($Otarea);
         }
         $usuarios = Cusuario::getUsuariosPorGrado();
-        return redirect("tareas/registrar")->with(['usuarios'=>$usuarios, 'estado' => 'realizado']);
+        return redirect("tareas/registrar")->with(['usuarios'=>$usuarios, 'estado' => 'registrada']);
     }
     public function getModificar(Request $request, $idTarea = -1){
         if(!(\Auth::user()->tieneAccion('tareas.modificar')))
@@ -159,7 +159,7 @@ class CtareasController extends Controller
         }
         return redirect("/tareas/listar")
                 ->with('tareas', $tareas)
-                ->with('estado', 'realizado');
+                ->with('estado', 'modificada');
     }
     public function getEliminar(){
         return redirect('/tareas/listar')->with('estado', 'no-seleccionado');
@@ -173,7 +173,7 @@ class CtareasController extends Controller
         foreach($tareas as $tarea){
             $tarea->usuarioResponsable = Cusuario::findOrFail($tarea->idUsu);
         }
-        return redirect("tareas/listar")->with('tareas',$tareas);
+        return redirect("tareas/listar")->with('tareas',$tareas)->with('estado', 'eliminada');
     }
 
 }
