@@ -155,6 +155,7 @@ return [
         Colmena\Providers\AuthServiceProvider::class,
         Colmena\Providers\EventServiceProvider::class,
         Colmena\Providers\RouteServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
