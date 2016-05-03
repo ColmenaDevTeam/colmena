@@ -30,7 +30,8 @@
         "phpunit/phpunit": "~4.0",
         "symfony/css-selector": "2.8.*|3.0.*",
         "symfony/dom-crawler": "2.8.*|3.0.*",
-        "guzzlehttp/guzzle": "~5.3|~6.0"
+        "guzzlehttp/guzzle": "~5.3|~6.0",           
+        "barryvdh/laravel-dompdf": "0.6.*"
     },
     "autoload": {
         "classmap": [

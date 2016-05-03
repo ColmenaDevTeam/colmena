@@ -26,8 +26,8 @@
 					@elseif(session('estado')=='no-seleccionado')
 						<div class="alert alert-info">
 							<strong>Información:</strong>
-							Usted no ha seleccionado ningún elemento para editar o modificar.
-							Presione el boton editar o modificar de ún elemento para seleccionarlo
+							Usted no ha seleccionado ningún elemento para eliminar o modificar.
+							Presione el boton eliminar o modificar de ún elemento para seleccionarlo
 						</div>
 					@else
 						<div class="alert alert-danger alert-dismissable">
@@ -38,11 +38,111 @@
 				</div><!-- /.col-xs-12 col-sm-12 col-md-12 col-lg-12-->
 			</div><!-- /.row-->
 		@endif
+   		     	<div class="row">
+		        	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			    		<p>
+			              <button class="btn" name="reportar" onClick="activarReporte()" type="button">
+			                  Reportar
+			              </button>
+			            </p>
+		            </div>
 
 
-
-
-			<div class="row">
+	            <div id="divreporte" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" hidden>
+	                <div class="alert alert-info alert-dismissable">
+	                    
+	                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+	                    <strong>¡Atención!</strong> *Seleccione los filtros para realizar su reporte.
+                        
+                        <form id="formReporteUsu" class="form" name="formReporteUsu" method="get" action="/usuarios/reportar" role="form">
+							{!! csrf_field() !!}
+							<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
+								<div class="form-group has-feedback">
+									<label for="subject">Persona</label>
+									<select name="idUsu" id="idUsu" class="form-control" required>
+										@foreach($Ousuarios as $Ousuario)
+										<option value={{$Ousuario->idUsu}}>{{$Ousuario->nombres}} {{$Ousuario->apellidos}}</option>
+										@endforeach
+									</select>
+									<input type="checkbox" id="todosusuarios"name="todosusuarios" value=true>
+										Todos los usuarios
+									</input>
+								</div>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
+								<div class="form-group has-feedback">
+									<label for="subject">Fecha Inicio</label>
+									<input type="date" class="form-control" id="startdate" name="startdate">
+								</div>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
+								<div class="form-group has-feedback">
+									<label for="subject">Fecha Fin</label>
+									<input type="date" class="form-control" id="enddate" name="enddate">
+								</div>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
+								<div class="form-group has-feedback">
+									<label for="subject">Ausencia</label>
+									<select name="ausencia" id="ausencia" class="form-control" required>
+										<option value=0>Permiso</option>
+										<option value=1>Reposo</option>
+									</select>
+									<input type="checkbox" id="todasausencias"name="todasausencias" value=true>
+											Todas las ausencias
+									</input>
+								</div>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
+								<div class="form-group has-feedback">
+									<label for="subject">Tareas</label><br>
+										<input type="checkbox" id="todastareas"name="todastareas" value=true>
+											Todas las tareas
+										</input>
+								</div>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
+								<div class="form-group has-feedback">
+									<label for="subject">Estado de Tarea</label>
+									<select name="ausencia" id="ausencia" class="form-control" required>
+										<option value="Asignada">Asignada</option>
+										<option value="Revision">Revision</option>
+										<option value="Cumplida">Cumplida</option>
+										<option value="Cancelada">Cancelada</option>
+										<option value="Diferida">Diferida</option>
+										<option value="Retrasada">Retrasada</option>
+									</select>
+									<input type="checkbox" id="todosestados"name="todosestados" value=true>
+										Todos los estados
+									</input>
+								</div>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
+								<div class="form-group has-feedback">
+									<label for="name">Tipo de Tarea</label><br>
+									<select name="tipoTarea" id="tipoTarea" class="form-control">
+						   				<option value="Academico-Docente">Academico-Docente</option>
+						   				<option value="Creacion intelectual">Creacion intelectual</option>
+						   				<option value="Integracion Social">Integracion Social</option>
+						   				<option value="Administrativo-Docente">Administrativo-Docente</option>
+						   				<option value="Produccion">Produccion</option>
+						   				<option value="Administrativas">Administrativas</option>
+									</select>
+									<input type="checkbox" id="todostipos"name="todostipos" value=true>
+										Todos los tipos
+									</input>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group has-feedback">
+									<button type="submit" class="btn">
+										Generar
+									</button>
+								</div>
+							</div>
+						</form>
+	                </div>
+	            </div>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<table id="thumbs" class="table table-striped">
 					<tr >
@@ -123,3 +223,8 @@
 	</section>
 
 @stop
+<script type="text/javascript">
+	function activarReporte(){
+		document.getElementById("divreporte").hidden = false;
+	}
+</script>

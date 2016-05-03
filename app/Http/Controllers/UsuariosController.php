@@ -31,7 +31,7 @@ cia al metodo getListar del controlador de ese modulo...............
     public function getListar(){
         if(!(\Auth::user()->tieneAccion('usuarios.listar')))
             return redirect('errores/acceso-negado');
-        $Ousuarios=Cusuario::all();
+        $Ousuarios=Cusuario::where('username', '!=', env('APP_DEV_USERNAME'))->get();
         return view("usuarios.listar")->with('Ousuarios',$Ousuarios);
     }
     public function getRegistrar(){
@@ -44,7 +44,7 @@ cia al metodo getListar del controlador de ese modulo...............
     /**
      * Obtiene los datos desde un objeto tipo request y los registra en la base de datos como un nuevo usuario.
      * @param  $request
-     * @return \Public\Resources\Usuarios\Perfil
+     * @return \Public\Resources\Usuarios\Perfil  
      */
     public function postRegistrar(Request $request){
         if(!(\Auth::user()->tieneAccion('usuarios.registrar')))
@@ -101,7 +101,7 @@ cia al metodo getListar del controlador de ese modulo...............
         if(!(\Auth::user()->tieneAccion('usuarios.eliminar')))
             return redirect('errores/acceso-negado');
 
-        $Ousuarios=Cusuario::all();
+        $Ousuarios=Cusuario::where('username', '!=', env('APP_DEV_USERNAME'))->get();
         return redirect("usuarios/listar")->with(['Ousuarios'=>$Ousuarios, 'estado'=>'no-seleccionado']);
     }
     public function postEliminar(Request $request){
@@ -110,7 +110,7 @@ cia al metodo getListar del controlador de ese modulo...............
 
         $Ousuario = Cusuario::find($request->get('idUsu'));
         $Ousuario->delete();
-        $Ousuarios=Cusuario::all();
+        $Ousuarios=Cusuario::where('username', '!=', env('APP_DEV_USERNAME'))->get();
         return redirect("usuarios/listar")->with(['estado'=>'realizado','Ousuarios',$Ousuarios]);
 
     }
@@ -155,7 +155,7 @@ cia al metodo getListar del controlador de ese modulo...............
     public function getModificar(){
         if(!(\Auth::user()->tieneAccion('usuarios.modificar')))
             return redirect('errores/acceso-negado');
-        $Ousuarios=Cusuario::all();
+        $Ousuarios=Cusuario::where('username', '!=', env('APP_DEV_USERNAME'))->get();
         return redirect("usuarios/listar")->with(['Ousuarios' => $Ousuarios, 'estado'=>'no-seleccionado']);
 
     }
@@ -201,7 +201,7 @@ cia al metodo getListar del controlador de ese modulo...............
             $Ousuario->tipUsu=$request->input("tipUsu");
 
         $Ousuario->save();
-        $Ousuarios=Cusuario::all();
+        $Ousuarios=Cusuario::where('username', '!=', env('APP_DEV_USERNAME'))->get();
 
         if( !is_null($request->input("roles"))){
             $roles = $request->get('roles');
@@ -225,5 +225,14 @@ cia al metodo getListar del controlador de ese modulo...............
             return view("/usuarios/perfil");
 
         return view("/usuarios/ver")->with('Ousuario',$Ousuario);
+    }
+
+    public function getReportar(Request $Request){
+        
+
+
+
+        $Ousuarios=Cusuario::where('username', '!=', env('APP_DEV_USERNAME'))->get();
+        return redirect("usuarios/listar")->with(['Ousuarios'=>$Ousuarios, 'estado'=>'realizado']);
     }
 }

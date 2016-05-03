@@ -35,14 +35,14 @@ class PermisosRepososController extends Controller
     public function getRegistrar(){
         if(!(\Auth::user()->tieneAccion('permisos_y_reposos.registrar')))
             return redirect('errores/acceso-negado');
-    	$usuarios=Cusuario::all();
+    	$usuarios=Cusuario::where('username', '!=', env('APP_DEV_USERNAME'))->get();
         return view("permisos-y-reposos.registrar")->with('usuarios',$usuarios);
     }
 
     public function postRegistrar(Request $request){
         if(!(\Auth::user()->tieneAccion('permisos_y_reposos.registrar')))
             return redirect('errores/acceso-negado');
-    	$usuarios=Cusuario::all();
+    	$usuarios=Cusuario::where('username', '!=', env('APP_DEV_USERNAME'))->get();
 
         $usuario=Cusuario::find($request->input("idUsu"));
         $Opermrepo = New Cpermrepo;
@@ -83,7 +83,7 @@ class PermisosRepososController extends Controller
     public function getModificar(Request $request){
         if(!(\Auth::user()->tieneAccion('permisos_y_reposos.modificar')))
             return redirect('errores/acceso-negado');
-        $usuarios=Cusuario::all();
+        $usuarios=Cusuario::where('username', '!=', env('APP_DEV_USERNAME'))->get();
 
         $OperRep = Cpermrepo::find($request->get('idPerRep'));
 
@@ -99,7 +99,7 @@ class PermisosRepososController extends Controller
             $OperRep->perRep = $request->input("perRep");
 
         if( !is_null($request->input("idUsu"))){
-            $usuarios=Cusuario::all();
+            $usuarios=Cusuario::where('username', '!=', env('APP_DEV_USERNAME'))->get();
             $usuario=Cusuario::find($request->input("idUsu"));
             $OperRep->idUsu=$usuario->idUsu;
         }
