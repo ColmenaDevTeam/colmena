@@ -50,18 +50,18 @@ class Cusuario extends Authenticatable
     }*/
 
     public static function getUsuariosPorGrado(){
-      function ordenaPorGrado(){
-
-        if ($a->getGradoOcupacion() == $b->getGradoOcupacion()) {
-            return 0;
-        }
-        return ($a < $b) ? -1 : 1;
-
-      }
-
-      $usuarios = Cusuario::all();
-      usort($usuarios, "ordenaPorGrado");
-      return $usuarios;
+        $usuarios = Cusuario::all();
+    
+        for($i=0; $i < count($usuarios); $i++){
+           for ( $j=$i+1;$j<=count($usuarios);$j++){
+              if ($usuarios[$i]->getGradoOcupacion() > $usuarios[$j]->getGradoOcupacion()) {
+                  $aux = $usuarios[$i];
+                  $usuarios[$i] = $usuarios[$j];
+                  $usuarios[$j] = $aux;
+                }
+              }
+          }
+        return $usuarios;
     }
     public function tieneRol($oRol){
         foreach ($this->roles as $iRol) {

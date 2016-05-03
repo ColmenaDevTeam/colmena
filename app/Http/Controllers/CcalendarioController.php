@@ -81,11 +81,12 @@ class CcalendarioController extends Controller{
                 $Ocalendario->save();
           }
         }
-        for ($i = 0; $i < count($fechas) ; $i++){
-            $Ocalendario = Ccalendario::firstOrCreate(['fecLab'=>$fechas[$i]]);
-			      $Ocalendario->save();
-		    }
-
+        else{
+          for ($i = 0; $i < count($fechas) ; $i++){
+              $Ocalendario = Ccalendario::firstOrCreate(['fecLab'=>$fechas[$i]]);
+  			      $Ocalendario->save();
+  		    }
+        }
     		$months = Ccalendario::diasAno();
     		$meses = Ccalendario::Meses();
 
@@ -94,7 +95,9 @@ class CcalendarioController extends Controller{
                     	    											 ->with('estado','realizado');
     	}
 
-      else return redirect('/calendario/actualizar')->with('estado','fallido');
+      else return redirect('/calendario/actualizar')->with('estado','fallido')
+                                                    ->with("months",$months)
+                                                    ->with("meses",$meses);
     }
 }
 
