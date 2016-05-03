@@ -40,9 +40,9 @@ class Ccalendario extends Model
     }
 
     public static function comparaAno(){
-        $registros= Ccalendario::all();
-        $Ocalendario = $registros->first();
-        $ultima= $Ocalendario->fecLab;
+
+        $Ocalendario = Ccalendario::all()->first();
+        $ultima= $Ocalendario->getOriginal('fecLab');
         $actual = date("Y-m-d");
 
         $aActual=explode("-", $actual);
@@ -54,6 +54,15 @@ class Ccalendario extends Model
     }
 
     public static function getProxima($actual){
+        $proximaFecha = Ccalendario::where('fecLab', '>',$actual)->get()->first();
+        if (is_null($proximaFecha)) {
+          return NULL;
+        }
+        return $proximaFecha->getOriginal('fecLab');
 
+    }
+
+    public static function getFechasDisponibles(){
+        return $fechasDisponibles = Ccalendario::all();
     }
 }

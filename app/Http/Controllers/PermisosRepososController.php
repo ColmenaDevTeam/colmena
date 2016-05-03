@@ -8,6 +8,7 @@ use Colmena\Http\Requests;
 use Colmena\Http\Controllers\Controller;
 use Colmena\Cusuario;
 use Colmena\CpermRepo;
+use Colmena\Ccalendario;
 /*
 En los metodos por ruta se antepone el tipo de peticion http. Ej getNombreMetodo
 postNombreMetodo etc. Y eso en las rutas se manejará como en minuscula de ma-
@@ -54,57 +55,38 @@ class PermisosRepososController extends Controller
         $Opermrepo->detalle = $request->input("details");
         $Opermrepo->save();
 
+        $tareasPorFecha = $usuario->getTareasPorFecha($Opermrepo->fecIni, $Opermrepo->fecFin);
+        if (!is_null($tareasPorFecha)) {
+            foreach ($tareasPorFecha as $tarea) {
+                $tarea->fecEst = Ccalendario::getProxima($Opermrepo->fecFin);
+                $tarea->save();
+            }
+        }
+
         $OperReps=Cpermrepo::all();
 
-        foreach ($OperReps as $OperRep) {
-            $OperRep->usuarioImplicado = Cusuario::findOrFail($OperRep->idUsu);
-        }
-        return redirect("permisos-y-reposos/registrar")->with(['estado'=>'realizado']);
+        return redirect("permisos-y-reposos/registrar")->with(['estado'=>'realizado', 'usuarios'=>$usuarios]);
     }
 
-    public function getEliminar(){
-        if(!(\Auth::user()->tieneAccion('permisos_y_reposos.eliminar')))
-            return redirect('errores/acceso-negado');
-        $OperReps=Cpermrepo::all();
-
-        foreach ($OperReps as $OperRep) {
-            $OperRep->usuarioImplicado = Cusuario::findOrFail($OperRep->idUsu);
-        }
-        return redirect("permisos-y-reposos/listar")->with(['OperReps'=>$OperReps, 'estado'=>'no-seleccionado']);
-    }
-
-    public function postEliminar(Request $request){
+    public function getEliminar(Request $request){
         if(!(\Auth::user()->tieneAccion('permisos_y_reposos.eliminar')))
             return redirect('errores/acceso-negado');
         $OperRep = Cpermrepo::find($request->get('idPerRep'));
         $OperRep->delete();
         
         $OperReps=Cpermrepo::all();
-        foreach ($OperReps as $OperRep) {
-            $OperRep->usuarioImplicado = Cusuario::findOrFail($OperRep->idUsu);
-        }
 
         return redirect("permisos-y-reposos/listar")->with(['estado'=>'realizado','OperReps'=>$OperReps]);
 
     }
 
-    public function getModificar(){
-        if(!(\Auth::user()->tieneAccion('permisos_y_reposos.modificar')))
-            return redirect('errores/acceso-negado');
-        $OperReps=Cpermrepo::all();
-
-        foreach ($OperReps as $OperRep) {
-            $OperRep->usuarioImplicado = Cusuario::findOrFail($OperRep->idUsu);
-        }
-        return redirect("permisos-y-reposos/listar")->with(['OperReps'=>$OperReps, 'estado'=>'no-seleccionado']);
-    }
-
-    public function postModificarPerRep(Request $request){
+    public function getModificar(Request $request){
         if(!(\Auth::user()->tieneAccion('permisos_y_reposos.modificar')))
             return redirect('errores/acceso-negado');
         $usuarios=Cusuario::all();
 
         $OperRep = Cpermrepo::find($request->get('idPerRep'));
+
         return view("permisos-y-reposos.modificar")->with(['OperRep'=>$OperRep, 'usuarios'=>$usuarios]);
     }
 
@@ -131,7 +113,14 @@ class PermisosRepososController extends Controller
             $OperRep->detalle=$request->input("details");
 
         $OperRep->save();
-
+        
+        $tareasPorFecha = $usuario->getTareasPorFecha($Opermrepo->fecIni, $Opermrepo->fecFin);
+        if (!is_null($tareasPorFecha)) {
+            foreach ($tareasPorFecha as $tarea) {
+                $tarea->fecEst = Ccalendario::getProxima($Opermrepo->fecFin);
+                $tarea->save();
+            }
+        }
         $OperReps=Cpermrepo::all();
         foreach ($OperReps as $OperRep) {
             $OperRep->usuarioImplicado = Cusuario::findOrFail($OperRep->idUsu);

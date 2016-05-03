@@ -145,4 +145,9 @@ class Cusuario extends Authenticatable
 EOD;
         return Mailer::enviar($Ousuario, $asunto, $mensaje);
     }
+    
+    public function getTareasPorFecha($fecIni, $fecFin){
+        $tareas = $this->tareas()->whereBetween('fecEst',[$fecIni,$fecFin])->get();
+        return $tareas;
+    }
 }

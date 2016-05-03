@@ -39,6 +39,14 @@
 				</div><!-- /.col-xs-12 col-sm-12 col-md-12 col-lg-12-->
 			</div><!-- /.row-->
 		@endif
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="alert alert-info alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<strong>¡Atención!</strong> Al registrar el nuevo usuario, Colmena -SGTH generará una clave de usuario aleatoria para él. Sus datos de ingreso serán enviados via email. Recuerde que todos los campos son obligatorios.
+				</div>
+			</div>
+		</div><!-- /.row -->
 			<div class="row">
 				<div class="contact-form">
 					<form id="formRegistroUsuarios" role="form" name="formRegistroUsuarios" method="post" action="" onSubmit="validar_clave()">
@@ -130,15 +138,8 @@
 						</div><!-- /.row -->
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<div class="alert alert-info alert-dismissable">
-									<button type="button" class="close" data-dismiss="alert">&times;</button>
-									<strong>¡Atención!</strong> Al registrar el nuevo usuario, Colmena -SGTH generará una clave de usuario aleatoria para él. Sus datos de ingreso serán enviados via email.
-								</div>
-							</div>
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 								<input type="button" value="Registrar Usuario" class="btn btn-default" onclick="validar()">
 							</div>
-
 						</div><!-- /.row -->
 					</form>
 				</div><!-- /.contact-form -->

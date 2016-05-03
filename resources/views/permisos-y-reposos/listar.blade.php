@@ -81,7 +81,7 @@
 							<td align="center">{{$OperRep->fecFin}}</td>
 							<td align="center">{{$OperRep->detalle}}</td>
 							
-							<form id="updatePerRep" class="form" name="updatePerRep" method="post" action="/permisos-y-reposos/modificar-per-rep">
+							<form id="updatePerRep" class="form" name="updatePerRep" method="get" action="/permisos-y-reposos/modificar">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<input type="hidden" name="idPerRep" value="{{$OperRep->idPerRep}}" name="idPerRep" id="idPerRep">
 								<td align="center">
@@ -91,7 +91,7 @@
 								</td>
 							</form>
 
-							<form id="deletePerRep" class="form" name="deletePerRep" method="post" action="/permisos-y-reposos/eliminar">
+							<form id="deletePerRep" class="form" name="deletePerRep" method="get" action="/permisos-y-reposos/eliminar">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<input type="hidden" name="idPerRep" value="{{$OperRep->idPerRep}}" name="idPerRep">
 								<td align="center">

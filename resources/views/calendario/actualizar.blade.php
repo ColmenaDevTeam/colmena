@@ -1,6 +1,13 @@
 @extends('layouts.main_layout')
 @section('contenido')
-    <section id="inner-headline" @if(count($fechasGuardadas)) onLoad="alert('Esto es el onload con registros')"@endif>
+
+<?php $colFechas="" ?>
+@if(isset($fechasGuardadas))
+    @foreach($fechasGuardadas as $fecha)
+        <?php  $colFechas=$colFechas.$fecha->getOriginal('fecLab')."//";  ?>
+    @endforeach
+@endif
+    <section id="inner-headline">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -29,29 +36,37 @@
                     </div><!-- /.col-xs-12 col-sm-12 col-md-12 col-lg-12-->
                 </div><!-- /.row-->
             @endif
-
-            <div class="form-group has-feedback">
-                <span class="help-block">
-                    <p class="" style="font-weight: bold;">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="alert alert-info alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>¡Atención!</strong>
+                    <p>
                         *Al actualizar el calendario, puede seleccionar un conjunto de
                         fechas. Estas fechas representan los dias que seran tomados
                         como laborables.
                     </p>
-                    <p style="font-weight: bold;">
+                    <p >
                         *Si deselecciona un dia laborable las tareas que fueron asignadas
                         para dicha fecha seran reasignadas a la siguiente fecha laborable.
                     </p>
-                    <p style="font-weight: bold;">
+                    <p>
                         *Tome en cuenta que el sistema solo permitira la modificacion de las
                         fechas que se encuentren en un rango de dos(2) semanas antes de la fecha
                         actual.
                     </p>
-                    <p style="font-weight: bold;">
+                    <p>
                         *Al seleccionar una fecha, esta es marcada en color <font color="#6198fd" size="5">AZUL</font>.
                     </p>
-                </span>
+                    <p>
+                      <button class="btn" name="cargarAno" onClick="checkYear('{{$colFechas}}')" type="button">
+                          Cargar Dias
+                      </button>
+                    </p>
 
+                </div>
             </div>
+        </div><!-- /.row -->
 
             <?php $m=0; ?>
             <form id="calendar-form" role="form" method="post" name="formularioCalendario" action="/calendario/actualizar">
@@ -94,9 +109,9 @@
                                             @else
                                                 <td align="center" >
                                                     @if(isset($days[$i]))
-                                                        <a href="#{{$days[$i]}}" onClick="setCheck('{{$days[$i]}}-{{$m+1}}','{{$days[$i]}}-{{$m+1}}-{{date('Y')}}')" class="list-group-item">
-                                                            <div id="{{$days[$i]}}-{{$m+1}}-{{date('Y')}}">
-                                                                <input type="checkbox" id="{{$days[$i]}}-{{$m+1}}" name="fechas[]" value="{{$days[$i]}}-{{$m+1}}-{{date('Y')}}" hidden="">
+                                                        <a href="#{{$days[$i]}}" onClick="setCheck('{{date('Y')}}-{{str_pad($m+1,2,'0',STR_PAD_LEFT)}}-{{str_pad($days[$i],2,'0',STR_PAD_LEFT)}}')" class="list-group-item">
+                                                            <div  id="{{date('Y')}}-{{str_pad($m+1,2,'0',STR_PAD_LEFT)}}-{{str_pad($days[$i],2,'0',STR_PAD_LEFT)}}-div">
+                                                                <input type="checkbox" id="{{date('Y')}}-{{str_pad($m+1,2,'0',STR_PAD_LEFT)}}-{{str_pad($days[$i],2,'0',STR_PAD_LEFT)}}" name="fechas[]" value="{{date('Y')}}-{{str_pad($m+1,2,'0',STR_PAD_LEFT)}}-{{str_pad($days[$i],2,'0',STR_PAD_LEFT)}}" hidden="">
                                                                     {{$days[$i]}}
                                                             </div>
                                                         </a>
@@ -136,30 +151,34 @@
         </div><!-- /.container-->
     </section>
 @endsection
+
 <script type="text/javascript">
-    function setCheck(item,item2){
+    function setCheck(item){
+      //alert(item);
         if(document.getElementById(item).checked){
             document.getElementById(item).checked = false;
-            document.getElementById(item2).style.background="#FFF";
+            document.getElementById(item+"-div").style.background="#FFF";
         }
         else{
             document.getElementById(item).checked = true;
-            document.getElementById(item2).style.background="#6198fd";
+            document.getElementById(item+"-div").style.background="#6198fd";
         }
     }
 
     function checkWeek (week,month){
         var dia="";
-        var div="";
+        var day;
         if (!week) {}
         else{
             semana = week.split(" ");
             d = new Date();
             year = d.getFullYear();
+            month = (month < 10) ? ("0" + month) : month;
             for(var i=0; i<semana.length-1; i++){
-                dia = semana[i]+"-"+month;
-                div = dia+"-"+year;
-                setCheck(dia,div);
+                day=semana[i];
+                day = (day < 10) ? ("0" + day) : day;
+                dia = year+"-"+month+"-"+day;
+                setCheck(dia);
             }
         }
     }
@@ -173,7 +192,11 @@
         }
     }
     function checkYear(dates){
-        aDates= dates.split(" ")
+        //alert(dates);
+        aDates= dates.split("//");
+        for(var l=0; l<(aDates.length-1); l++){
+            setCheck(aDates[l]);
+        }
     }
 
     function validar(){
