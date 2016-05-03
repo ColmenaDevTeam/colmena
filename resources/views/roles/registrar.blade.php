@@ -49,7 +49,7 @@
 										un usuario que posea este Rol.
 									</p>
 									<p style="font-weight: bold;">
-										Si es seleccionada ninguna acción disponible para un rol,
+										Si no es seleccionada ninguna acción disponible para el rol,
 										puede seleccionarlas despues en la sección de modificar Roles.
 									</p>
 								</span>

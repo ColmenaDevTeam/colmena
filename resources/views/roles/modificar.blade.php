@@ -44,13 +44,10 @@
 								<i class="fa fa-users form-control-feedback"></i>
 								<span class="help-block">
 									<p class="" style="font-weight: bold;">
-										Al registrar un Rol de Usuario, puede seleccionarse un conjunto de
-										una o más acciones. Estas acciones representan la permisología que tendrá
-										un usuario que posea este Rol.
 									</p>
 									<p style="font-weight: bold;">
-										Si es seleccionada ninguna acción disponible para un rol,
-										puede seleccionarlas despues en la sección de modificar Roles.
+										Si no es seleccionada ninguna acción disponible para el rol,
+										puede seleccionarlas despues.
 									</p>
 								</span>
 
@@ -75,7 +72,7 @@
 							</div><!-- /.list-group-->
 						</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<input type="button" value="Registrar Rol de Usuario" class="btn btn-default" onClick="validar()">
+							<input type="button" value="Guardar cambios" class="btn btn-default" onClick="validar()">
 						</div> <!-- /.col-xs-12 col-sm-12 col-md-12 col-lg-12-->
 					</div><!-- -/.row-->
 					<input type="hidden" name="idRol" value="{{$Orol->idRol}}">
