@@ -45,7 +45,7 @@
 										<i class="fa fa-pencil form-control-feedback"></i>
 									</div>
 								</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
-								@if(Auth::user()->tieneRolPorNombre('Jefe de Departamento'))
+								@if(Auth::user()->tieneAccion('tareas.modificar'))
 									<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 										<div class="form-group has-feedback">
 											<label for="name">Actualizar Estado</label><br>

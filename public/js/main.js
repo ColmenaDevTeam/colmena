@@ -2,6 +2,8 @@
 function confirmarEliminar(formId){
     var form = document.getElementById(formId);
     var msg = "¿Está seguro que desea eliminar el elemento seleccionado?";
+    if(formId == 'deleteUsu')
+        msg = "¿Está seguro que desea eliminar el usuario seleccionado?";
     if(confirm(msg)){
         form.submit();
     }
