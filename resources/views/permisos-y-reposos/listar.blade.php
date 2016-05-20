@@ -79,7 +79,7 @@
 							<td align="center">{{$OperRep->usuarioImplicado->nombres}} {{$OperRep->usuarioImplicado->apellidos}}</td>
 							<td align="center">{{$OperRep->fecIni}}</td>
 							<td align="center">{{$OperRep->fecFin}}</td>
-							<td align="center">{{$OperRep->detalle}}</td>
+							<td align="center">{{$OperRep->getDetalleAcortado()}}</td>
 							
 							<form id="updatePerRep" class="form" name="updatePerRep" method="get" action="/permisos-y-reposos/modificar">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">

@@ -31,4 +31,8 @@ class Cpermrepo extends Model
         else
             return "Reposo";
     }
+    public function getDetalleAcortado($numCaracteres = 25){
+        return (strlen($this->detalle) <= $numCaracteres) ?
+            $this->detalle : substr($this->detalle,0,$numCaracteres-3).'...';
+    }
 }
