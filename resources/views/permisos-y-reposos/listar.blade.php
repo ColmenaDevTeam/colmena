@@ -46,7 +46,7 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<table id="thumbs" class="table table-striped">
 					<tr >
-						<td></td><td></td><td></td><td></td><td></td>
+						<td colspan="5"></td>
 						<td align="center"><strong>Registrar</strong></td>
 						<td align="center">
 							<form class="form" id="registrarPerRep" method="get" action="../permisos-y-reposos/registrar">

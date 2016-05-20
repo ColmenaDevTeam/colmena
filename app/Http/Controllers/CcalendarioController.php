@@ -83,7 +83,8 @@ class CcalendarioController extends Controller{
         }
         else{
           for ($i = 0; $i < count($fechas) ; $i++){
-              $Ocalendario = Ccalendario::firstOrCreate(['fecLab'=>$fechas[$i]]);
+              $Ocalendario = new Ccalendario;
+              $Ocalendario->fecLab = $fechas[$i];
   			      $Ocalendario->save();
   		    }
         }

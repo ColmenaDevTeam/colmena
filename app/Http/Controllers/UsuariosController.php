@@ -3,15 +3,18 @@
 *@author QSoto
 */
 namespace Colmena\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use Colmena\Http\Requests;
-use Colmena\Http\Controllers\Controller;
 
+use Colmena\Http\Controllers\Controller;
 use Colmena\Crol;
 use Colmena\Cusuario;
+
+use Colmena\Ctarea;
+use Colmena\CpermRepo;
 use Colmena\Mailer;
+
+use PDF;
 
 class UsuariosController extends Controller
 {
@@ -227,12 +230,150 @@ cia al metodo getListar del controlador de ese modulo...............
         return view("/usuarios/ver")->with('Ousuario',$Ousuario);
     }
 
-    public function getReportar(Request $Request){
+    public function getReportar(Request $request){
+        //dd($request->input("todasausencias"));
+        $descripcion = "Reporte de: ";
+            if($request->input("todasausencias")=="1"){
+                    $tipoAusencia = [0,1];
+                    $descripcion = $descripcion."Todas las ausencias, ";
+                }
+            else{
+                if ($request->input("ausencia")!="-") {
+                    if ($request->input("ausencia")==1) {
+                        $tipoAusencia=[1];
+                        $descripcion = $descripcion."Permisos, ";
+                    }
+                    elseif($request->input("ausencia")==0){
+                        $tipoAusencia=[0];
+                        $descripcion = $descripcion."Reposos, ";
+                    }
+                }
+                else $tipoAusencia = NULL;
+            }
+                #Fin de permisos y reposos
+                #tareas en general
+                if ($request->input("todastareas")=="1") {
+                    $tipoTarea = ['Academico-Docente', 'Creacion intelectual', 'Integracion Social', 'Administrativo-Docente', 'Produccion', 'Administrativas'];
+                    $estadoTarea = ['Asignada', 'Revision', 'Cumplida', 'Cancelada', 'Diferida', 'Retrasada'];
+                    $descripcion = $descripcion."Todas las tareas.";
+                }
+                #fin de tareas en general
+                #tareas por estado
+                else{
+                    if ($request->input("todosestados")=="1") {
+                        $estadoTarea = ['Asignada', 'Revision', 'Cumplida', 'Cancelada', 'Diferida', 'Retrasada'];
+                        $descripcion = $descripcion."Todos los estados de tarea, ";
+                    }
+                    elseif($request->input('estadoTarea')!="-"){
+                        switch ($request->input('estadoTarea')) {
+                            case 'Asignada':
+                                $estadoTarea = 'Asignada';
+                                $descripcion = $descripcion."Estado de tarea Asignada, ";
+                            case 'Revision':
+                                $estadoTarea = 'Revision';
+                                $descripcion = $descripcion."Estado de tarea Revision, ";
+                            case 'Cumplida':
+                                $estadoTarea = 'Cumplida';
+                                $descripcion = $descripcion."Estado de tarea Cumplida, ";
+                            case 'Cancelada':
+                                $estadoTarea = 'Cancelada';
+                                $descripcion = $descripcion."Estado de tarea Cancelada, ";
+                            case 'Diferida':
+                                $estadoTarea = 'Diferida';
+                                $descripcion = $descripcion."Estado de tarea Diferida, ";
+                            case 'Retrasada':
+                                $estadoTarea = 'Retrasada';
+                                $descripcion = $descripcion."Estado de tarea Retrasada, ";
+                            default:
+                                $estadoTarea = NULL;
+                        }
+                    }
+                    else $estadoTarea = NULL;
+                #fin de tareas por estado
+                #tareas por tipo
+                    if ($request->input("todostipo")=="1") {
+                        $tipoTarea = ['Academico-Docente', 'Creacion intelectual', 'Integracion Social', 'Administrativo-Docente', 'Produccion', 'Administrativas'];
+                        $descripcion = $descripcion."Todas los tipos de tareas.";
+                    }
+                    elseif($request->input('tipoTarea')!="-"){
+                        switch ($request->input('tipoTarea')) {
+                            case 'Academico-Docente':
+                                $tipoTarea = ['Academico-Docente'];
+                                $descripcion = $descripcion."Tipo de tarea Asignada.";
+                            case 'Creacion intelectual':
+                                $tipoTarea = ['Academico-Docente'];
+                                $descripcion = $descripcion."Tipo de tarea Academico-Docente.";
+                            case 'Integracion Social':
+                                $tipoTarea = ['Integracion Social'];
+                                $descripcion = $descripcion."Tipo de tarea Integracion Social.";
+                            case 'Administrativo-Docente':
+                                $tipoTarea = ['Administrativo-Docente'];
+                                $descripcion = $descripcion."Tipo de tarea Administrativo-Docente.";
+                            case 'Produccion':
+                                $tipoTarea = ['Produccion'];
+                                $descripcion = $descripcion."Tipo de tarea Produccion";
+                            case 'Administrativas':
+                                $tipoTarea = ['Administrativas'];
+                                $descripcion = $descripcion."Tipo de tarea Administrativas.";
+                            default:
+                                $tipoTarea=NULL;
+                        }
+                    }
+                    else $tipoTarea=NULL;
+                #fin de tareas por tipo
+                }
         
+        if($request->input("todosusuarios")=="1"){
+            $usuarios = Cusuario::where('username', '!=', env('APP_DEV_USERNAME'))->get();
+            foreach ($usuarios as $Ousuario) {
+                #Permisos y reposos
+                if ($request->input("todasausencias")=="1" or !is_null($tipoAusencia)) {
+                    $perRepos[$Ousuario->idUsu]=CpermRepo::where('idUsu', '=', $Ousuario->idUsu)
+                                        ->whereIn('perRep', $tipoAusencia)
+                                        ->whereBetween('fecIni',[$request->input('startdate'),$request->input('enddate') ])->get();
+                }
+                else $perRepos[$Ousuario->idUsu] = NULL;
 
+                if (!is_null($request->input("todastareas")) or !is_null($tipoTarea) or !is_null($estadoTarea)) {
+                    $tareas[$Ousuario->idUsu] = Ctarea::where('idUsu', '=', $Ousuario->idUsu)
+                                        ->whereIn('tipTar', $tipoTarea)
+                                        ->whereIn('estTar', $estadoTarea)
+                                        ->whereBetween('fecEst',[$request->input('startdate'),$request->input('enddate') ])->get();
+                }
+                else $tareas[$Ousuario->idUsu] = NULL;
+                
+            }
+        }
+        else{
+            $usuarios = Cusuario::where('idUsu', '=', $request->input('idUsu'))->get();
+            foreach ($usuarios as $Ousuario) {
+                if (!is_null($request->input("todasausencias")) or !is_null($tipoAusencia)) {
+                
+                    $perRepos[$Ousuario->idUsu]=CpermRepo::where('idUsu', '=', $Ousuario->idUsu)
+                                        ->whereIn('perRep', $tipoAusencia)
+                                        ->whereBetween('fecIni',[$request->input('startdate'),$request->input('enddate') ])->get();
+                }
+                else $perRepos[$Ousuario->idUsu] = NULL;
 
+                if ($request->input("todastareas")=="1" or !is_null($tipoTarea) or !is_null($estadoTarea)) {
+
+                    $tareas[$Ousuario->idUsu] = Ctarea::where('idUsu', '=', $Ousuario->idUsu)
+                                        ->whereIn('tipTar', $tipoTarea)
+                                        ->whereIn('estTar', $estadoTarea)
+                                        ->whereBetween('fecEst',[$request->input('startdate'),$request->input('enddate') ])->get();
+                }
+                else $tareas[$Ousuario->idUsu] = NULL;
+            }
+        #    $data = [$usuarios, $perRepos, $tareas];
+        }
+        $data = array('usuarios'=>$usuarios, 'perRepos'=>$perRepos, 'tareas'=>$tareas, 
+                    'startdate'=>$request->input('startdate'), 'enddate'=>$request->input('enddate'), 'descripcion'=>$descripcion);
+        //dd($data);
+        $reporte = PDF::loadView('usuarios/reporte', $data);
 
         $Ousuarios=Cusuario::where('username', '!=', env('APP_DEV_USERNAME'))->get();
-        return redirect("usuarios/listar")->with(['Ousuarios'=>$Ousuarios, 'estado'=>'realizado']);
+        //return redirect("usuarios/listar")->with(['Ousuarios'=>$Ousuarios, 'estado'=>'realizado'])
+         //                                 ->with($reporte->download('reporte.pdf'));
+        return $reporte->download('reporte.pdf');
     }
 }

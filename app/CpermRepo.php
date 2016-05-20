@@ -24,4 +24,11 @@ class Cpermrepo extends Model
     public function getURL(){
         return "/permisos-y-reposos/ver/".$this->idPerRep;
     }
+    public function getNombreAusencia(){
+        if ($this->perRep==1) {
+            return "Permiso";
+        }
+        else
+            return "Reposo";
+    }
 }

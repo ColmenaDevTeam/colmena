@@ -50,10 +50,11 @@ class Cusuario extends Authenticatable
     }*/
 
     public static function getUsuariosPorGrado(){
-        $usuarios = Cusuario::all();
+        $usuarios = Cusuario::where('username', '!=', env('APP_DEV_USERNAME'))->get();
+        
     
         for($i=0; $i < count($usuarios); $i++){
-           for ( $j=$i+1;$j<=count($usuarios);$j++){
+           for ( $j=$i+1;$j<count($usuarios);$j++){
               if ($usuarios[$i]->getGradoOcupacion() > $usuarios[$j]->getGradoOcupacion()) {
                   $aux = $usuarios[$i];
                   $usuarios[$i] = $usuarios[$j];

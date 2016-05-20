@@ -16,11 +16,13 @@ class TRoleUsuasSeeder extends Seeder
      */
     public function run()
     {
-        $role = Crol::find(1);
+        $roles = Crol::all();
         $usuario = Cusuario::find(1);
-    	DB::table('t_role_usuas') -> insert([
-        	'idRol' => $role->idRol,
-        	'idUsu' => $usuario->idUsu
-    	]);
+        foreach ($roles as $role) {
+        	DB::table('t_role_usuas') -> insert([
+            	'idRol' => $role->idRol,
+            	'idUsu' => $usuario->idUsu
+        	]);
+        }
     }
 }

@@ -61,76 +61,83 @@
 									<label for="subject">Persona</label>
 									<select name="idUsu" id="idUsu" class="form-control" required>
 										@foreach($Ousuarios as $Ousuario)
-										<option value={{$Ousuario->idUsu}}>{{$Ousuario->nombres}} {{$Ousuario->apellidos}}</option>
+										<option value="{{$Ousuario->idUsu}}" id="usuario" name="usuario">{{$Ousuario->getNombreCompleto()}}</option>
 										@endforeach
 									</select>
-									<input type="checkbox" id="todosusuarios"name="todosusuarios" value=true>
+									<input type="checkbox" id="todosusuarios"name="todosusuarios" value="1">
 										Todos los usuarios
 									</input>
 								</div>
 							</div>
-							<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
-								<div class="form-group has-feedback">
-									<label for="subject">Fecha Inicio</label>
-									<input type="date" class="form-control" id="startdate" name="startdate">
+							<div class="row">
+								<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
+									<div class="form-group has-feedback">
+										<label for="subject">Fecha Inicio</label>
+										<input type="date" class="form-control" id="startdate" name="startdate">
+									</div>
+								</div>
+								<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
+									<div class="form-group has-feedback">
+										<label for="subject">Fecha Fin</label>
+										<input type="date" class="form-control" id="enddate" name="enddate">
+									</div>
 								</div>
 							</div>
-							<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
-								<div class="form-group has-feedback">
-									<label for="subject">Fecha Fin</label>
-									<input type="date" class="form-control" id="enddate" name="enddate">
-								</div>
-							</div>
-							<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
-								<div class="form-group has-feedback">
-									<label for="subject">Ausencia</label>
-									<select name="ausencia" id="ausencia" class="form-control" required>
-										<option value=0>Permiso</option>
-										<option value=1>Reposo</option>
-									</select>
-									<input type="checkbox" id="todasausencias"name="todasausencias" value=true>
+							<div class="row">
+								<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
+									<div class="form-group has-feedback">
+										<label for="subject">Ausencia</label>
+										<select name="ausencia" id="ausencia" class="form-control">
+											<option hidden="">-</option>
+											<option value=1>Permiso</option>
+											<option value=0>Reposo</option>
+										</select>
+										<input type="checkbox" id="todasausencias"name="todasausencias" value="1">
 											Todas las ausencias
-									</input>
-								</div>
-							</div>
-							<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
-								<div class="form-group has-feedback">
-									<label for="subject">Tareas</label><br>
-										<input type="checkbox" id="todastareas"name="todastareas" value=true>
-											Todas las tareas
 										</input>
+									</div>
 								</div>
-							</div>
-							<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
-								<div class="form-group has-feedback">
-									<label for="subject">Estado de Tarea</label>
-									<select name="ausencia" id="ausencia" class="form-control" required>
-										<option value="Asignada">Asignada</option>
-										<option value="Revision">Revision</option>
-										<option value="Cumplida">Cumplida</option>
-										<option value="Cancelada">Cancelada</option>
-										<option value="Diferida">Diferida</option>
-										<option value="Retrasada">Retrasada</option>
-									</select>
-									<input type="checkbox" id="todosestados"name="todosestados" value=true>
-										Todos los estados
-									</input>
+								<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
+									<div class="form-group has-feedback">
+										<label for="subject">Tareas</label><br>
+											<input type="checkbox" id="todastareas"name="todastareas" value="1">
+												Todas las tareas
+											</input>
+									</div>
 								</div>
-							</div>
-							<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
-								<div class="form-group has-feedback">
-									<label for="name">Tipo de Tarea</label><br>
-									<select name="tipoTarea" id="tipoTarea" class="form-control">
-						   				<option value="Academico-Docente">Academico-Docente</option>
-						   				<option value="Creacion intelectual">Creacion intelectual</option>
-						   				<option value="Integracion Social">Integracion Social</option>
-						   				<option value="Administrativo-Docente">Administrativo-Docente</option>
-						   				<option value="Produccion">Produccion</option>
-						   				<option value="Administrativas">Administrativas</option>
-									</select>
-									<input type="checkbox" id="todostipos"name="todostipos" value=true>
-										Todos los tipos
-									</input>
+								<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
+									<div class="form-group has-feedback">
+										<label for="subject">Estado de Tarea</label>
+										<select name="estadoTarea" id="estadoTarea" class="form-control" selected="">
+											<option hidden="">-</option>
+											<option value="Asignada">Asignada</option>
+											<option value="Revision">Revision</option>
+											<option value="Cumplida">Cumplida</option>
+											<option value="Cancelada">Cancelada</option>
+											<option value="Diferida">Diferida</option>
+											<option value="Retrasada">Retrasada</option>
+										</select>
+										<input type="checkbox" id="todosestados"name="todosestados" value="1">
+											Todos los estados
+										</input>
+									</div>
+								</div>
+								<div class="col-xs-4 col-sm-3 col-md-4 col-lg-3">
+									<div class="form-group has-feedback">
+										<label for="name">Tipo de Tarea</label><br>
+										<select name="tipoTarea" id="tipoTarea" class="form-control">
+											<option hidden="" value="">-</option>
+							   				<option value="Academico-Docente">Academico-Docente</option>
+							   				<option value="Creacion intelectual">Creacion intelectual</option>
+							   				<option value="Integracion Social">Integracion Social</option>
+							   				<option value="Administrativo-Docente">Administrativo-Docente</option>
+							   				<option value="Produccion">Produccion</option>
+							   				<option value="Administrativas">Administrativas</option>
+										</select>
+										<input type="checkbox" id="todostipos"name="todostipos" value="1">
+											Todos los tipos
+										</input>
+									</div>
 								</div>
 							</div>
 							<div class="row">
@@ -146,8 +153,8 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<table id="thumbs" class="table table-striped">
 					<tr >
-						<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-						<td align="center"><strong>Registrar</strong></td>
+						<td colspan="8"></td>
+						<td align="center" ><strong>Registrar</strong></td>
 						<td align="center">
 							<form class="form" id="registrarUsu" method="get" action="../usuarios/registrar">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -172,49 +179,42 @@
 
 					</tr>
 					@foreach($Ousuarios as $Ousuario)
-						<?php
-						$mostrar = true;
-						if($Ousuario->username == env('APP_DEV_USERNAME') && Auth::user()->username != env('APP_DEV_USERNAME'))
-							$mostrar = false;
-						?>
-						@if($mostrar)
-							<tr>
-								<td align="center">{{$Ousuario->cedula}}</td>
-								<td align="center">{{$Ousuario->nombres}}</td>
-								<td align="center">{{$Ousuario->apellidos}}</td>
-								<td align="center">{{$Ousuario->fecNac}}</td>
+						<tr>
+							<td align="center">{{$Ousuario->cedula}}</td>
+							<td align="center">{{$Ousuario->nombres}}</td>
+							<td align="center">{{$Ousuario->apellidos}}</td>
+							<td align="center">{{$Ousuario->fecNac}}</td>
 
-								@if($Ousuario->sexo==1)
-									<td align="center">Masculino</td>
-								@else
-									<td align="center">Femenino</td>
-								@endif
+							@if($Ousuario->sexo==1)
+								<td align="center">Masculino</td>
+							@else
+								<td align="center">Femenino</td>
+							@endif
 
-								<td align="center">{{$Ousuario->tipUsu}}</td>
-								<td align="center">{{$Ousuario->email}}</td>
-								<td align="center">{{$Ousuario->telefono}}</td>
+							<td align="center">{{$Ousuario->tipUsu}}</td>
+							<td align="center">{{$Ousuario->email}}</td>
+							<td align="center">{{$Ousuario->telefono}}</td>
 
-								<form id="updateUsu" class="form" name="updateUsu" method="post" action="/usuarios/modificar">
-									<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									<input type="hidden" name="idUsu" value="{{$Ousuario->idUsu}}" name="idUsu">
-									<td align="center">
-										<button class="btn" id="updateUsu" onclick="submit()">
-											<i class="fa fa-pencil" value="Actualizar"></i>
-										</button>
-									</td>
-								</form>
+							<form id="updateUsu" class="form" name="updateUsu" method="post" action="/usuarios/modificar">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<input type="hidden" name="idUsu" value="{{$Ousuario->idUsu}}" name="idUsu">
+								<td align="center">
+									<button class="btn" id="updateUsu" onclick="submit()">
+										<i class="fa fa-pencil" value="Actualizar"></i>
+									</button>
+								</td>
+							</form>
 
-								<form id="deleteUsu" class="form" name="deleteUsu" method="post" action="/usuarios/eliminar">
-									<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									<input type="hidden" name="idUsu" value="{{$Ousuario->idUsu}}" name="idUsu">
-									<td align="center">
-										<button class="btn" id="deleteUsu" onclick="submit()">
-											<i class="fa fa-times" value="Eliminar"></i>
-										</button>
-									</td>
-								</form>
-							</tr>
-						@endif
+							<form id="deleteUsu" class="form" name="deleteUsu" method="post" action="/usuarios/eliminar">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<input type="hidden" name="idUsu" value="{{$Ousuario->idUsu}}" name="idUsu">
+								<td align="center">
+									<button class="btn" id="deleteUsu" onclick="submit()">
+										<i class="fa fa-times" value="Eliminar"></i>
+									</button>
+								</td>
+							</form>
+						</tr>
 					@endforeach
 				</table>
 				</div>

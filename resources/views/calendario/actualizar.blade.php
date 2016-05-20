@@ -79,9 +79,9 @@
                             <table class="table" align="center">
 
                                 <tr>
-                                    <td></td><td></td><td></td><td></td>
+                                    <td colspan="4"></td>
                                     <td align="center" ><i class="fa fa-calendar" value="">  {{$meses[$m]}}</td>
-                                    <td></td><td></td> <td></td>
+                                    <td colspan="3"></td>
                                 </tr>
                                 <tr>
                                     <td align="center">Lunes</td>
