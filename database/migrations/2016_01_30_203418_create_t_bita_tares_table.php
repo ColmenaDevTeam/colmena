@@ -18,6 +18,9 @@ class CreateTBitaTaresTable extends Migration
             $table->increments('idBitTar');
             $table->integer('idTar')->unsigned();
             $table->foreign('idTar')->references('idTar')->on('t_tareas')->onDelete('cascade');
+            $table->string('estado',45);
+            $table->timestamp('fecInc');
+            $table->string('nombreUsu',45);
             $table->text('detalle');
         });
     }

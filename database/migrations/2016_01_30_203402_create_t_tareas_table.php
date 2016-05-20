@@ -23,7 +23,7 @@ class CreateTTareasTable extends Migration
             $table->integer('prioridad');
             $table->integer('complejidad');
             $table->enum('estTar',['Asignada','Revision','Cumplida','Cancelada','Diferida','Retardada']);
-            $table->enum('tipTar',['Academico-Docente','Administrativas','Creacion intelectual','Integracion Social','Administrativo-Docente','Produccion','Desarrollo Profesional']);
+            $table->enum('tipTar',['Academico-Docente','Administrativas','Creacion intelectual','Integracion Social','Administrativo-Docente','Produccion']);
             $table->integer('idUsu')->unsigned();
             $table->foreign('idUsu')->references('idUsu')->on('t_usuarios')->onDelete('cascade');
             $table->boolean('visto')->default(false);

@@ -17,6 +17,7 @@ class CreateTAccionesTable extends Migration
         Schema::create('t_acciones', function (Blueprint $table) {
             $table->increments('idAcc');
             $table->string('nombre',45)->unique();
+            $table->boolean('navegacion')->default(false);
         });
     }
 

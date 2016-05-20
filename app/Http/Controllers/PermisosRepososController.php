@@ -73,7 +73,7 @@ class PermisosRepososController extends Controller
             return redirect('errores/acceso-negado');
         $OperRep = Cpermrepo::find($request->get('idPerRep'));
         $OperRep->delete();
-        
+
         $OperReps=Cpermrepo::all();
 
         return redirect("permisos-y-reposos/listar")->with(['estado'=>'realizado','OperReps'=>$OperReps]);
@@ -113,7 +113,7 @@ class PermisosRepososController extends Controller
             $OperRep->detalle=$request->input("details");
 
         $OperRep->save();
-        
+
         $tareasPorFecha = $usuario->getTareasPorFecha($Opermrepo->fecIni, $Opermrepo->fecFin);
         if (!is_null($tareasPorFecha)) {
             foreach ($tareasPorFecha as $tarea) {
@@ -130,7 +130,7 @@ class PermisosRepososController extends Controller
 
     }
 
-        
+
 /*
 Aparte, necesito que hagan un metodo en el modelo de permRep, que sea algo como "estaVigente()"
 o no encuentro la palabra exacta, que devuelva true si está en reposo o permiso, o sea si la fecha

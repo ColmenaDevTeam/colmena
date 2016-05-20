@@ -26,6 +26,7 @@ class CreateTUsuariosTable extends Migration
             $table->string('telefono',15);
             $table->date('fecNac');
             $table->boolean('sexo');
+            $table->boolean('activo')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

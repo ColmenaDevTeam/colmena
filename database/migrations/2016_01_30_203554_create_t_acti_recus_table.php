@@ -22,7 +22,11 @@ class CreateTActiRecusTable extends Migration
             $table->text('detalle');
             $table->integer('prioridad');
             $table->integer('complejidad');
-            $table->enum('tipTar',['Academico-Docente','Creacion intelectual','Integracion Social','Administrativo-Docente','Produccion','Desarrollo personal']);;
+            $table->enum('tipTar',['Academico-Docente','Administrativas','Creacion intelectual','Integracion Social','Administrativo-Docente','Produccion']);
+            $table->date('fecIni');
+            $table->date('ultLan')->nullable();
+            $table->boolean('activa')->nullable();
+            $table->nullableTimestamps();
         });
     }
 

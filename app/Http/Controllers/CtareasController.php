@@ -4,6 +4,7 @@
  */
 namespace Colmena\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Colmena\Cusuario;
 use Colmena\Http\Requests;
@@ -83,6 +84,9 @@ class CtareasController extends Controller
         $Obitacora = New CBitaTarea;
         $Obitacora->idTar = $Otarea->idTar;
         $Obitacora->detalle = $request->input("incidencia");
+        $Obitacora->nombreUsu = Auth::user()->getNombreCompleto();
+        $Obitacora->estado = $Otarea->estTar;
+        $Obitacora->fecInc = Carbon::now('America/Caracas');
         $Obitacora->save();
 
         $arrEstados = ['Asignada','Revision','Cumplida','Cancelada','Diferida','Retrasada'];
@@ -114,7 +118,7 @@ class CtareasController extends Controller
             CTarea::enviarEmailTareaAsignada($Otarea);
         }
         $usuarios = Cusuario::getUsuariosPorGrado();
-        return redirect("tareas/registrar")->with(['usuarios'=>$usuarios, 'estado' => 'registrada']);
+        return redirect("tareas/registrar")->with(['usuarios'=>$usuarios, 'estado' => 'realizado']);
     }
     public function getModificar(Request $request, $idTarea = -1){
         if(!(\Auth::user()->tieneAccion('tareas.modificar')))

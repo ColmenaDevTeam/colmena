@@ -17,7 +17,7 @@ class TUsuariosSeeder extends Seeder
     {
         $faker = Faker::create();
 	    DB::table('t_usuarios') -> insert([
-        'cedula'=>$faker->unique()->randomNumber($nbDigits=8),
+        'cedula'=>env('APP_DEV_USERNAME', 'colmenadevteam'),
         'username'=>env('APP_DEV_USERNAME', 'colmenadevteam'),
         'nombres'=>'Colmena',
         'apellidos'=>'Dev Team',
@@ -26,7 +26,7 @@ class TUsuariosSeeder extends Seeder
         'clave'=>Hash::make("0000"),
         'telefono'=>$faker->randomNumber($nbDigits=9),
         'fecNac'=>$faker->unique()->date($format = 'Y-m-d', $max = 'now'),
-        'sexo'=>$faker->boolean($chanceOfGettingTrue = 50),
+        'sexo'=>$faker->boolean(TRUE),
         'created_at'=>Carbon::now(),
         'updated_at'=>Carbon::now()
     	]);

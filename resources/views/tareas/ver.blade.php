@@ -70,11 +70,11 @@
 								<div class="table-responsive">
 					 				<a href="" class="list-group-item" onClick="return false;">
 					 					<p class="text-center">
-					 					<hr>	
-										@foreach ($bitacora as $bita)
-										<label for="" style="margin-left: 10pt;">{{$bita->detalle}}</label>
-										<hr>
-										@endforeach
+						 					<hr>	
+											@foreach ($bitacora as $bita)
+												<span class="label label-default">{{$bita->fecInc}}</span> Por: <span class="label label-default">{{$bita->nombreUsu}}</span> Estado: <span class="label label-default">{{$bita->estado}}</span> <br>{{$bita->detalle}}
+												<hr>
+											@endforeach
 										</p>
 									</a>
 								</div> <!-- /.table-responsive-->
