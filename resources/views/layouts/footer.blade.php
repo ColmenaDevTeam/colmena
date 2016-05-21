@@ -52,15 +52,15 @@
                         </a>
                     </li>
                     <li>
-                        <a target="_blank" href="#" data-placement="top" title="Manual de Usuario: PDF">
+                        <a target="" href="https://raw.githubusercontent.com/ColmenaDevTeam/colmena-sgth/master/documentacion/Manual-de-usuario-Colmena-SGTH.pdf" data-placement="top" title="Manual de Usuario: PDF">
                             <i class="fa fa-file-pdf-o"></i>
                         </a>
-                    </li>
+                    </li><!--
                     <li>
                         <a target="_blank" href="#" data-placement="top" title="Descargas">
                             <i class="fa fa-download"></i>
                         </a>
-                    </li>
+                    </li>-->
                     <li>
                         <a target="_blank" href="https://github.com/ColmenaDevTeam/colmena-sgth/issues?utf8=%E2%9C%93&q=is%3Aopen" data-placement="top" title="Reportar fallas o incidencias">
                             <i class="fa fa-bug"></i>

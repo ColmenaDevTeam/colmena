@@ -149,7 +149,7 @@
 										</a>
 										<a href="{{($pendiente->tipoDato == 'tareas') ? $pendiente->getURL() : '#'}}" class="list-group-item {{$clasesCssPorTipo[$pendiente->tipoDato]}}">
 											<span>Tipo: </span>
-											@if($tipoDato == 'permisos_y_reposos')
+											@if($pendiente->tipoDato == 'permisos_y_reposos')
 												{{$pendiente->getNombreAusencia()}}
 											@else
 												{{str_replace("ni", "ñ",ucwords(str_replace("_", " ", $pendiente->tipoDato)))}}
