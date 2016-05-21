@@ -38,7 +38,7 @@ class CactiRecuDaemon extends Command
         date_default_timezone_set('America/Caracas');
         $hoy = date('Y-m-d');
         $actiRecus = $this->getActiRecusLanzables();
-        $this->info('Lanzables ('.count($actiRecus).')');
+#        $this->info('Lanzables ('.count($actiRecus).')');
         foreach($actiRecus as $OactiRecu){
             $datos["titulo"] = $OactiRecu->titulo;
             $datos["detalle"] = $OactiRecu->detalle;
@@ -54,7 +54,7 @@ class CactiRecuDaemon extends Command
             Ctarea::crearMultiple($datos, $OactiRecu->usuariosAsignados);
                 $OactiRecu->ultLan = $hoy;
                 $OactiRecu->save();
-            $this->info('Lanzada :: '.$OactiRecu->idActRec);
+#            $this->info('Lanzada :: '.$OactiRecu->idActRec);
         }
     }
     /**
@@ -64,7 +64,7 @@ class CactiRecuDaemon extends Command
     private function getActiRecusLanzables(){
         $lanzables = [];//new Collection([]);
         $hoy = date('Y-m-d');
-        $this->line('HOY:'.$hoy);
+#        $this->line('HOY:'.$hoy);
         $actiRecus = CactividadRecurrente::all();
         foreach($actiRecus as $OactiRecu){
             //Si no se ha lanzado aún
@@ -72,22 +72,22 @@ class CactiRecuDaemon extends Command
                 || $OactiRecu->ultLan == ''
                 || $OactiRecu->ultLan == null){
                 //Si toca lanzarse hoy
-                $this->error('No ha sido lanzada :: '.$OactiRecu->idActRec);
+#                $this->error('No ha sido lanzada :: '.$OactiRecu->idActRec);
                 if($OactiRecu->fecIni == $hoy){
                     $lanzables[] = $OactiRecu;
-                    $this->line('Lanzable :: '.$OactiRecu->idActRec);
+#                    $this->line('Lanzable :: '.$OactiRecu->idActRec);
                 }
             }
             //Si ya fue lanzada
             else{
-                $this->error('Ya fue lanzada :: '.$OactiRecu->idActRec);
+#                $this->error('Ya fue lanzada :: '.$OactiRecu->idActRec);
                 $siguienteLanzamiento =
                     Carbon::createFromFormat('Y-m-d', $OactiRecu->ultLan, 'America/Caracas')
                     ->addDays($OactiRecu->getFrecuenciaEnDias());
                 if($siguienteLanzamiento->isToday()){
 
                     $lanzables[] = $OactiRecu;
-                    $this->line('Lanzable :: '.$OactiRecu->idActRec);
+#                    $this->line('Lanzable :: '.$OactiRecu->idActRec);
                 }
             }
         }
