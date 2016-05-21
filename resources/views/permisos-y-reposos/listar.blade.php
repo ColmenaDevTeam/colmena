@@ -41,7 +41,7 @@
 
 
 
-		
+
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<table id="thumbs" class="table table-striped">
@@ -58,14 +58,14 @@
 						</td>
 					</tr>
 					<tr>
-					
+
 						<td align="center"><strong>Tipo de Ausencia</strong></td>
 						<td align="center"><strong>Persona</strong></td>
 						<td align="center"><strong>Fecha Inicio</strong></td>
 						<td align="center"><strong>Fecha Fin</strong></td>
 						<td align="center"><strong>Detalle</strong></td>
 						<td align="center"><strong>Modificar</strong></td>
-						<td align="center"><strong>Eliminar</strong></td>						
+						<td align="center"><strong>Eliminar</strong></td>
 
 					</tr>
 					@foreach($OperReps as $OperRep)
@@ -73,14 +73,14 @@
 							@if($OperRep->perRep==1)
 								<td align="center">Permiso</td>
 							@else
-								<td align="center">Reposo</td> 
-							@endif						
+								<td align="center">Reposo</td>
+							@endif
 
 							<td align="center">{{$OperRep->usuarioImplicado->nombres}} {{$OperRep->usuarioImplicado->apellidos}}</td>
 							<td align="center">{{$OperRep->fecIni}}</td>
 							<td align="center">{{$OperRep->fecFin}}</td>
 							<td align="center">{{$OperRep->getDetalleAcortado()}}</td>
-							
+
 							<form id="updatePerRep" class="form" name="updatePerRep" method="get" action="/permisos-y-reposos/modificar">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<input type="hidden" name="idPerRep" value="{{$OperRep->idPerRep}}" name="idPerRep" id="idPerRep">
@@ -95,7 +95,7 @@
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<input type="hidden" name="idPerRep" value="{{$OperRep->idPerRep}}" name="idPerRep">
 								<td align="center">
-									<button class="btn" id="deletePerRep" onclick="submit()">
+									<button class="btn" id="deletePerRep" onclick="confirmarEliminar('deletePerRep')">
 										<i class="fa fa-times" value="Eliminar"></i>
 									</button>
 								</td>
