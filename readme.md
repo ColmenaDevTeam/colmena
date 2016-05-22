@@ -22,9 +22,9 @@ de Formación en Informática en la Universidad Politécnica Territorial Andrés
 
 ## Autores:
 
-* **Elias Peraza** _eliasperaza0511@gmail.com_
-* **Quintin Soto** _quintin.soto96@gmail.com_
-* **Victor Hidalgo** _pkzkon@gmail.com_
+* **Elias Peraza** [@tes1oner](https://twitter.com/tes1oner)
+* **Quintin Soto** [@qsoto](https://twitter.com/BlueQasv)
+* **Victor Hidalgo** [@konh](https://twitter.com/VicNonsense)
 
 ## Licencia:
 
